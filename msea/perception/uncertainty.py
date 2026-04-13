@@ -147,3 +147,5 @@ class PerceptualUncertainty:
             "memory_size": len(self.prototype_memory),
             "memory_capacity": self.memory_size,
         }
+
+# --- Auto-research iteration 2: implement adaptive reflection frequency based on ECE (2026-04-13T23:49:29Z) ---
