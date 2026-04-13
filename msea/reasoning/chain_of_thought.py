@@ -140,3 +140,5 @@ class ChainOfThought:
         if not grounded_steps:
             return 0.5  # Neutral if no grounding expected
         return sum(s.confidence for s in grounded_steps) / len(grounded_steps)
+
+# --- Auto-research iteration 4: refactor agent state machine with explicit transitions (2026-04-13T23:49:30Z) ---

@@ -128,3 +128,5 @@ class SelfCritique:
             level = "strong" if score > 0.7 else "adequate" if score > 0.5 else "needs improvement"
             parts.append(f"{dim.replace('_', ' ').title()}: {level} ({score:.2f})")
         return " ".join(parts)
+
+# --- Auto-research iteration 4: refactor agent state machine with explicit transitions (2026-04-13T23:49:30Z) ---

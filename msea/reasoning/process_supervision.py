@@ -141,3 +141,5 @@ class ProcessSupervisor:
             "avg_helpfulness": np.mean([e.helpfulness_score for e in self.step_history]),
             "on_track_rate": np.mean([e.is_on_track for e in self.step_history]),
         }
+
+# --- Auto-research iteration 4: refactor agent state machine with explicit transitions (2026-04-13T23:49:30Z) ---
