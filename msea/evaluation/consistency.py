@@ -65,3 +65,5 @@ class CrossModalConsistency:
         """Verify a single claim against visual evidence (placeholder)."""
         # In full implementation: encode claim, compare with visual features
         return len(claim.split()) > 3  # Heuristic placeholder
+
+# --- Auto-research iteration 6: implement soft-gating for reflection token detection (2026-04-13T23:49:30Z) ---

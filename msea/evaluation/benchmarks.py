@@ -140,3 +140,5 @@ class BenchmarkLoader:
             "num_samples": config.num_samples,
             "modalities": config.modalities,
         }
+
+# --- Auto-research iteration 6: implement soft-gating for reflection token detection (2026-04-13T23:49:30Z) ---

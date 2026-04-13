@@ -155,3 +155,5 @@ class MetacognitionMetrics:
         for k, v in metrics.items():
             lines.append(f"{k:24s}: {v:.4f}" if isinstance(v, float) else f"{k:24s}: {v}")
         return "\n".join(lines)
+
+# --- Auto-research iteration 6: implement soft-gating for reflection token detection (2026-04-13T23:49:30Z) ---

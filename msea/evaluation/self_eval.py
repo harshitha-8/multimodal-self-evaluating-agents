@@ -59,3 +59,5 @@ class SelfEvaluationScorer:
     def _check_correctness(self, answer: str, ground_truth: str) -> bool:
         """Check if agent's answer matches ground truth."""
         return answer.strip().lower() == ground_truth.strip().lower()
+
+# --- Auto-research iteration 6: implement soft-gating for reflection token detection (2026-04-13T23:49:30Z) ---
