@@ -473,3 +473,5 @@ class MetacognitiveAgent(BaseAgent):
                f"Original answer: {output.answer}. "
                f"After reflection, the refined answer maintains core reasoning "
                f"while addressing identified weaknesses.")
+
+# --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-04-13T23:49:29Z) ---

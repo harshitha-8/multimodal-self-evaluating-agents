@@ -171,3 +171,5 @@ class MultiAgentCoordinator(BaseAgent):
         avg_confidence = sum(v.confidence for v in votes) / len(votes)
 
         return best_vote.answer, avg_confidence
+
+# --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-04-13T23:49:29Z) ---

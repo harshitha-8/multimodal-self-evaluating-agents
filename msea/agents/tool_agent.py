@@ -275,3 +275,5 @@ class ToolAugmentedAgent(BaseAgent):
         """Reset including tool budget."""
         super().reset()
         self.tool_calls_remaining = self.tool_budget
+
+# --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-04-13T23:49:29Z) ---
