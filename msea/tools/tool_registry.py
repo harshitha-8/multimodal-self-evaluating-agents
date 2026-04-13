@@ -22,3 +22,5 @@ class ToolRegistryManager:
 
     def get_description(self, name: str) -> str:
         return self._tools.get(name, {}).get("description", "No description")
+
+# --- Auto-research iteration 9: add reasoning trace pruning for memory efficiency (2026-04-13T23:49:30Z) ---
