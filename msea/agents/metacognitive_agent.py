@@ -475,3 +475,5 @@ class MetacognitiveAgent(BaseAgent):
                f"while addressing identified weaknesses.")
 
 # --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-04-13T23:49:29Z) ---
+
+# --- Auto-research iteration 10: refactor tool selection with cost-benefit scoring (2026-04-13T23:49:30Z) ---
