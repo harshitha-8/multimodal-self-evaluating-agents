@@ -69,3 +69,5 @@ class FeatureExtractor:
             return max(e.output_dim for e in self.encoders.values())
 
 # --- Auto-research iteration 2: implement adaptive reflection frequency based on ECE (2026-04-13T23:49:29Z) ---
+
+# --- Auto-research iteration 3: add entropy-based uncertainty estimation to base agent (2026-04-13T23:49:30Z) ---
