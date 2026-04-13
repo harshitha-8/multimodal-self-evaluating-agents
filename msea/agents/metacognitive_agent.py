@@ -1,0 +1,475 @@
+"""
+Metacognitive Agent — Self-evaluating multimodal reasoning agent.
+Core contribution: agents that reason about their own reasoning process.
+
+Key capabilities:
+1. Generates reasoning traces over multimodal inputs
+2. Predicts its own performance (metacognitive accuracy)
+3. Detects uncertainty and adapts strategy
+4. Requests tools when confidence is low
+5. Iteratively refines through self-critique
+"""
+
+import math
+import time
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional, Tuple
+
+from msea.agents.base_agent import (
+    BaseAgent, AgentOutput, AgentState, Observation, ReasoningTrace
+)
+
+
+@dataclass
+class MetacognitiveState:
+    """Internal state tracking for metacognitive monitoring."""
+    calibration_history: List[Tuple[float, bool]] = field(default_factory=list)
+    failure_patterns: List[str] = field(default_factory=list)
+    strategy_effectiveness: Dict[str, float] = field(default_factory=dict)
+    cumulative_surprise: float = 0.0
+    adaptation_count: int = 0
+
+
+class ReflectionToken:
+    """
+    Special token mechanism for triggering self-evaluation mid-reasoning.
+    Inspired by process supervision — evaluate at intermediate steps.
+    """
+    REFLECT = "[REFLECT]"
+    UNCERTAIN = "[UNCERTAIN]"
+    TOOL_NEEDED = "[TOOL_NEEDED]"
+    CONTRADICTION = "[CONTRADICTION]"
+    CONFIDENT = "[CONFIDENT]"
+
+    @staticmethod
+    def detect(thought: str) -> List[str]:
+        """Detect reflection signals in reasoning text."""
+        signals = []
+        uncertainty_words = ["maybe", "perhaps", "not sure", "unclear", "ambiguous",
+                           "could be", "might", "possibly", "uncertain"]
+        contradiction_words = ["however", "but", "contradicts", "inconsistent",
+                             "conflicts with", "doesn't match"]
+        confidence_words = ["clearly", "definitely", "certainly", "obviously",
+                          "without doubt", "evidently"]
+
+        thought_lower = thought.lower()
+        if any(w in thought_lower for w in uncertainty_words):
+            signals.append(ReflectionToken.UNCERTAIN)
+        if any(w in thought_lower for w in contradiction_words):
+            signals.append(ReflectionToken.CONTRADICTION)
+        if any(w in thought_lower for w in confidence_words):
+            signals.append(ReflectionToken.CONFIDENT)
+        return signals
+
+
+class MetacognitiveAgent(BaseAgent):
+    """
+    Agent with metacognitive capabilities — it evaluates its own reasoning
+    quality and adapts its strategy based on self-assessment.
+
+    Architecture:
+    1. Perception → Feature extraction from multimodal inputs
+    2. Reasoning with reflection tokens
+    3. Process-level self-evaluation (not just outcome-level)
+    4. Calibrated confidence estimation
+    5. Strategy adaptation based on metacognitive feedback
+    """
+
+    def __init__(self, config: Dict[str, Any]):
+        super().__init__(config)
+        self.name = config.get("name", "MetacognitiveAgent")
+        self.meta_state = MetacognitiveState()
+        self.reflection_frequency = config.get("reflection_frequency", 3)
+        self.calibration_window = config.get("calibration_window", 50)
+        self.adaptation_threshold = config.get("adaptation_threshold", 0.3)
+        self.max_refinement_rounds = config.get("max_refinement_rounds", 3)
+
+        # Metacognitive parameters (these are the ones the agent can tune)
+        self.confidence_bias = config.get("confidence_bias", 0.0)
+        self.uncertainty_scale = config.get("uncertainty_scale", 1.0)
+        self.reflection_depth = config.get("reflection_depth", 2)
+
+    def perceive(self, observation: Observation) -> Dict[str, Any]:
+        """
+        Process multimodal observation and extract features.
+        Includes initial uncertainty estimation from perceptual signals.
+        """
+        features = {
+            "has_visual": observation.visual is not None,
+            "has_textual": observation.textual is not None,
+            "has_structured": observation.structured is not None,
+            "modalities": [],
+            "perceptual_uncertainty": 0.5,
+        }
+
+        if observation.visual is not None:
+            features["modalities"].append("visual")
+            features["visual_features"] = self._extract_visual_features(observation.visual)
+
+        if observation.textual is not None:
+            features["modalities"].append("textual")
+            features["textual_features"] = self._extract_textual_features(observation.textual)
+
+        if observation.structured is not None:
+            features["modalities"].append("structured")
+            features["structured_features"] = observation.structured
+
+        # Cross-modal consistency check
+        if len(features["modalities"]) > 1:
+            features["cross_modal_consistency"] = self._check_cross_modal_consistency(features)
+        else:
+            features["cross_modal_consistency"] = 1.0
+
+        # Initial perceptual uncertainty
+        features["perceptual_uncertainty"] = self._estimate_perceptual_uncertainty(features)
+
+        return features
+
+    def reason(self, features: Dict[str, Any], context: Optional[str] = None) -> ReasoningTrace:
+        """
+        Generate a reasoning step with embedded metacognitive monitoring.
+        Inserts reflection tokens at regular intervals.
+        """
+        # Determine reasoning strategy based on metacognitive state
+        strategy = self._select_strategy(features)
+
+        # Generate thought
+        thought = self._generate_thought(features, context, strategy)
+
+        # Detect reflection signals
+        reflection_signals = ReflectionToken.detect(thought)
+
+        # Estimate step-level confidence
+        step_confidence = self._estimate_step_confidence(
+            features, thought, reflection_signals
+        )
+
+        # Determine if tool use is needed
+        action = None
+        action_input = None
+        if ReflectionToken.TOOL_NEEDED in reflection_signals or step_confidence < 0.3:
+            action, action_input = self._select_tool(features, thought)
+
+        # Estimate uncertainty
+        uncertainty = 1.0 - step_confidence
+
+        # Check for termination
+        is_terminal = self._should_terminate(features, thought, step_confidence)
+
+        return ReasoningTrace(
+            step_id=0,  # Will be set by the run loop
+            thought=thought,
+            action=action,
+            action_input=action_input,
+            confidence=step_confidence,
+            uncertainty=uncertainty,
+            is_terminal=is_terminal,
+        )
+
+    def self_evaluate(self, output: AgentOutput) -> float:
+        """
+        Metacognitive self-evaluation: predict own correctness.
+
+        Uses multiple signals:
+        1. Reasoning chain coherence
+        2. Confidence calibration history
+        3. Cross-modal consistency
+        4. Reflection token analysis
+        5. Strategy track record
+        """
+        scores = []
+
+        # Signal 1: Reasoning chain coherence
+        coherence = self._evaluate_chain_coherence(output.reasoning_trace)
+        scores.append(("coherence", coherence, 0.25))
+
+        # Signal 2: Calibrated confidence
+        calibrated = self._calibrate_confidence(output.confidence)
+        scores.append(("calibrated_confidence", calibrated, 0.25))
+
+        # Signal 3: Reflection signal analysis
+        reflection_score = self._analyze_reflections(output.reasoning_trace)
+        scores.append(("reflection_analysis", reflection_score, 0.20))
+
+        # Signal 4: Uncertainty consistency
+        uncertainty_score = 1.0 - output.uncertainty_estimate
+        scores.append(("uncertainty", uncertainty_score, 0.15))
+
+        # Signal 5: Historical performance on similar inputs
+        historical = self._get_historical_performance()
+        scores.append(("historical", historical, 0.15))
+
+        # Weighted combination
+        total_weight = sum(w for _, _, w in scores)
+        self_eval = sum(s * w for _, s, w in scores) / total_weight
+
+        # Apply bias correction from calibration
+        self_eval = max(0.0, min(1.0, self_eval + self.confidence_bias))
+
+        if self.verbose:
+            print(f"  Self-eval breakdown:")
+            for name, score, weight in scores:
+                print(f"    {name}: {score:.3f} (w={weight:.2f})")
+            print(f"  Final self-eval: {self_eval:.3f}")
+
+        return self_eval
+
+    def estimate_uncertainty(self, features: Dict[str, Any]) -> float:
+        """
+        Estimate epistemic uncertainty for current input.
+        Combines perceptual, semantic, and metacognitive uncertainty.
+        """
+        perceptual_unc = features.get("perceptual_uncertainty", 0.5)
+        cross_modal_unc = 1.0 - features.get("cross_modal_consistency", 0.5)
+
+        # Metacognitive uncertainty: how well-calibrated have we been?
+        meta_unc = self._get_metacognitive_uncertainty()
+
+        # Combine with learned scaling
+        combined = (
+            0.4 * perceptual_unc +
+            0.3 * cross_modal_unc +
+            0.3 * meta_unc
+        ) * self.uncertainty_scale
+
+        return max(0.0, min(1.0, combined))
+
+    def refine(self, output: AgentOutput, critique: str) -> AgentOutput:
+        """
+        Refine output through self-critique loop.
+        Implements iterative refinement with diminishing returns detection.
+        """
+        current = output
+        for round_num in range(self.max_refinement_rounds):
+            # Generate refined reasoning
+            refined_thought = self._refine_with_critique(current, critique)
+
+            # Create new trace entry
+            refinement_trace = ReasoningTrace(
+                step_id=len(current.reasoning_trace) + round_num,
+                thought=f"[REFINEMENT {round_num + 1}] {refined_thought}",
+                confidence=0.0,  # Will be updated
+                uncertainty=0.0,
+            )
+
+            # Re-evaluate
+            new_traces = current.reasoning_trace + [refinement_trace]
+            new_confidence = self._aggregate_confidence(new_traces)
+            refinement_trace.confidence = new_confidence
+
+            new_output = AgentOutput(
+                answer=refined_thought,
+                reasoning_trace=new_traces,
+                confidence=new_confidence,
+                self_eval_score=0.0,
+                uncertainty_estimate=current.uncertainty_estimate * 0.9,
+                tools_used=current.tools_used,
+                num_refinement_rounds=round_num + 1,
+                total_time=current.total_time,
+            )
+
+            new_output.self_eval_score = self.self_evaluate(new_output)
+
+            # Check for diminishing returns
+            improvement = new_output.self_eval_score - current.self_eval_score
+            if improvement < 0.01:
+                break
+
+            current = new_output
+            critique = self._generate_critique(current)
+            self.meta_state.adaptation_count += 1
+
+        return current
+
+    def update_calibration(self, predicted_score: float, was_correct: bool):
+        """
+        Update calibration history with ground truth feedback.
+        This is the learning signal for metacognitive improvement.
+        """
+        self.meta_state.calibration_history.append((predicted_score, was_correct))
+
+        # Keep window bounded
+        if len(self.meta_state.calibration_history) > self.calibration_window:
+            self.meta_state.calibration_history = \
+                self.meta_state.calibration_history[-self.calibration_window:]
+
+        # Update confidence bias for better calibration
+        if len(self.meta_state.calibration_history) >= 10:
+            self._update_confidence_bias()
+
+        # Track surprise (prediction error)
+        surprise = abs(predicted_score - float(was_correct))
+        self.meta_state.cumulative_surprise += surprise
+
+    # --- Private methods ---
+
+    def _extract_visual_features(self, visual_input: Any) -> Dict[str, Any]:
+        """Extract visual features (placeholder for encoder integration)."""
+        return {"type": "visual", "shape": getattr(visual_input, "shape", None)}
+
+    def _extract_textual_features(self, text: str) -> Dict[str, Any]:
+        """Extract textual features."""
+        return {
+            "type": "textual",
+            "length": len(text),
+            "word_count": len(text.split()),
+            "has_question": "?" in text,
+        }
+
+    def _check_cross_modal_consistency(self, features: Dict[str, Any]) -> float:
+        """Check consistency between different modalities."""
+        # Placeholder: in full implementation, would use cross-modal similarity
+        return 0.8
+
+    def _estimate_perceptual_uncertainty(self, features: Dict[str, Any]) -> float:
+        """Estimate uncertainty from perceptual features."""
+        num_modalities = len(features.get("modalities", []))
+        # More modalities = lower uncertainty (redundancy helps)
+        base_uncertainty = 1.0 / (1.0 + num_modalities)
+        return base_uncertainty
+
+    def _select_strategy(self, features: Dict[str, Any]) -> str:
+        """Select reasoning strategy based on metacognitive state."""
+        uncertainty = features.get("perceptual_uncertainty", 0.5)
+        if uncertainty > 0.7:
+            return "cautious"  # More reflection, lower confidence claims
+        elif uncertainty < 0.3:
+            return "direct"    # Fast path with fewer reflection steps
+        else:
+            return "balanced"  # Default strategy
+
+    def _generate_thought(self, features: Dict, context: Optional[str],
+                          strategy: str) -> str:
+        """Generate a reasoning thought (placeholder for LLM integration)."""
+        modalities = features.get("modalities", [])
+        mod_str = ", ".join(modalities) if modalities else "none"
+
+        if strategy == "cautious":
+            return (f"Analyzing {mod_str} input carefully. "
+                   f"High uncertainty detected — proceeding with detailed analysis. "
+                   f"Perhaps additional evidence is needed.")
+        elif strategy == "direct":
+            return (f"Clear {mod_str} signal. "
+                   f"Confident in direct interpretation. "
+                   f"The answer is clearly supported by the evidence.")
+        else:
+            return (f"Processing {mod_str} input. "
+                   f"Forming hypothesis based on available evidence. "
+                   f"Moderate confidence — may need refinement.")
+
+    def _estimate_step_confidence(self, features: Dict, thought: str,
+                                   signals: List[str]) -> float:
+        """Estimate confidence for a single reasoning step."""
+        base_confidence = 0.5
+
+        # Adjust based on reflection signals
+        if ReflectionToken.CONFIDENT in signals:
+            base_confidence += 0.2
+        if ReflectionToken.UNCERTAIN in signals:
+            base_confidence -= 0.2
+        if ReflectionToken.CONTRADICTION in signals:
+            base_confidence -= 0.3
+
+        # Adjust based on cross-modal consistency
+        consistency = features.get("cross_modal_consistency", 0.5)
+        base_confidence += 0.1 * (consistency - 0.5)
+
+        return max(0.0, min(1.0, base_confidence))
+
+    def _select_tool(self, features: Dict, thought: str) -> Tuple[Optional[str], Optional[Dict]]:
+        """Select appropriate tool based on current context."""
+        if features.get("has_visual") and features.get("has_textual"):
+            return "visual_qa", {"query": thought}
+        elif features.get("has_textual"):
+            return "retrieval", {"query": thought}
+        return None, None
+
+    def _should_terminate(self, features: Dict, thought: str,
+                         confidence: float) -> bool:
+        """Decide whether to terminate reasoning."""
+        return confidence > self.confidence_threshold
+
+    def _evaluate_chain_coherence(self, traces: List[ReasoningTrace]) -> float:
+        """Evaluate coherence of the reasoning chain."""
+        if not traces:
+            return 0.0
+        if len(traces) == 1:
+            return traces[0].confidence
+
+        # Check for monotonic confidence increase (sign of convergence)
+        confidences = [t.confidence for t in traces]
+        increasing = sum(1 for i in range(1, len(confidences))
+                        if confidences[i] >= confidences[i-1])
+        coherence = increasing / max(1, len(confidences) - 1)
+        return coherence
+
+    def _calibrate_confidence(self, raw_confidence: float) -> float:
+        """Apply calibration correction to raw confidence."""
+        if len(self.meta_state.calibration_history) < 5:
+            return raw_confidence  # Not enough data to calibrate
+
+        # Simple Platt scaling approximation
+        predicted = [p for p, _ in self.meta_state.calibration_history]
+        actual = [float(a) for _, a in self.meta_state.calibration_history]
+
+        # Calculate calibration error
+        avg_predicted = sum(predicted) / len(predicted)
+        avg_actual = sum(actual) / len(actual)
+
+        # Adjust towards better calibration
+        correction = (avg_actual - avg_predicted) * 0.5
+        calibrated = raw_confidence + correction
+        return max(0.0, min(1.0, calibrated))
+
+    def _analyze_reflections(self, traces: List[ReasoningTrace]) -> float:
+        """Analyze reflection token patterns in the reasoning chain."""
+        if not traces:
+            return 0.5
+
+        all_signals = []
+        for trace in traces:
+            signals = ReflectionToken.detect(trace.thought)
+            all_signals.extend(signals)
+
+        if not all_signals:
+            return 0.5
+
+        confident_count = all_signals.count(ReflectionToken.CONFIDENT)
+        uncertain_count = all_signals.count(ReflectionToken.UNCERTAIN)
+        contradiction_count = all_signals.count(ReflectionToken.CONTRADICTION)
+
+        total = len(all_signals)
+        score = (confident_count - uncertain_count - 2 * contradiction_count) / total
+        return max(0.0, min(1.0, 0.5 + score * 0.5))
+
+    def _get_historical_performance(self) -> float:
+        """Get average historical self-evaluation performance."""
+        if not self.meta_state.calibration_history:
+            return 0.5
+        actual = [float(a) for _, a in self.meta_state.calibration_history]
+        return sum(actual) / len(actual)
+
+    def _get_metacognitive_uncertainty(self) -> float:
+        """Estimate metacognitive uncertainty from calibration quality."""
+        if len(self.meta_state.calibration_history) < 5:
+            return 0.5  # Maximum uncertainty when insufficient data
+
+        # Expected Calibration Error (ECE)
+        predicted = [p for p, _ in self.meta_state.calibration_history[-20:]]
+        actual = [float(a) for _, a in self.meta_state.calibration_history[-20:]]
+        errors = [abs(p - a) for p, a in zip(predicted, actual)]
+        ece = sum(errors) / len(errors)
+        return ece
+
+    def _update_confidence_bias(self):
+        """Update confidence bias based on calibration history."""
+        predicted = [p for p, _ in self.meta_state.calibration_history]
+        actual = [float(a) for _, a in self.meta_state.calibration_history]
+        self.confidence_bias = (sum(actual) - sum(predicted)) / len(predicted) * 0.1
+
+    def _refine_with_critique(self, output: AgentOutput, critique: str) -> str:
+        """Generate refined answer based on critique."""
+        return (f"Revised answer considering: {critique}. "
+               f"Original answer: {output.answer}. "
+               f"After reflection, the refined answer maintains core reasoning "
+               f"while addressing identified weaknesses.")

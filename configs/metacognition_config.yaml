@@ -1,0 +1,24 @@
+# Metacognition-focused experiment config
+# Higher reflection depth, more refinement rounds
+
+experiment:
+  name: "metacognition_deep"
+  seed: 42
+  max_samples: 500
+  benchmark: "synthetic_metacognition"
+
+agent:
+  type: "metacognitive"
+  name: "MetacognitiveAgent-Deep"
+  max_reasoning_steps: 12
+  confidence_threshold: 0.6
+  reflection_frequency: 2
+  calibration_window: 100
+  max_refinement_rounds: 5
+  reflection_depth: 4
+  uncertainty_scale: 1.2
+
+reasoning:
+  max_cot_steps: 12
+  process_supervision: true
+  strictness: 0.4

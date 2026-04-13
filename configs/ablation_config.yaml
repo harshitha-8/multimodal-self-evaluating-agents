@@ -1,0 +1,27 @@
+# Ablation study config — systematically disable components
+
+experiment:
+  name: "ablation"
+  seed: 42
+  max_samples: 200
+
+ablations:
+  - name: "no_reflection"
+    agent:
+      max_refinement_rounds: 0
+      reflection_frequency: 999  # effectively disabled
+
+  - name: "no_tools"
+    tools:
+      tool_budget: 0
+
+  - name: "no_process_supervision"
+    reasoning:
+      process_supervision: false
+
+  - name: "no_uncertainty"
+    agent:
+      uncertainty_scale: 0.0
+
+  - name: "full_model"
+    # All defaults — this is the control

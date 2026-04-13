@@ -1,0 +1,157 @@
+"""
+Evaluation Metrics for Metacognitive Agents.
+Primary metric: self-evaluation accuracy (does the agent correctly predict its own performance?)
+"""
+
+from typing import Any, Dict, List, Optional, Tuple
+import numpy as np
+
+
+def compute_self_eval_accuracy(predictions: List[float], actuals: List[bool],
+                                threshold: float = 0.5) -> float:
+    """
+    Compute self-evaluation accuracy: how often does the agent correctly
+    predict whether it will succeed or fail?
+
+    Args:
+        predictions: Agent's self-assessed confidence scores [0, 1]
+        actuals: Whether the agent was actually correct (True/False)
+        threshold: Confidence threshold for binary prediction
+    Returns:
+        Accuracy of self-evaluation predictions
+    """
+    if not predictions:
+        return 0.0
+    correct = sum(
+        1 for p, a in zip(predictions, actuals)
+        if (p >= threshold) == a
+    )
+    return correct / len(predictions)
+
+
+def compute_ece(predictions: List[float], actuals: List[bool],
+                n_bins: int = 10) -> float:
+    """
+    Compute Expected Calibration Error (ECE).
+    Measures how well confidence scores correspond to actual accuracy.
+
+    Lower ECE = better calibrated metacognition.
+    """
+    if not predictions:
+        return 1.0
+
+    bins = np.linspace(0, 1, n_bins + 1)
+    ece = 0.0
+    total = len(predictions)
+
+    for i in range(n_bins):
+        mask = [(bins[i] <= p < bins[i + 1]) for p in predictions]
+        bin_preds = [p for p, m in zip(predictions, mask) if m]
+        bin_actuals = [a for a, m in zip(actuals, mask) if m]
+
+        if not bin_preds:
+            continue
+
+        avg_confidence = np.mean(bin_preds)
+        avg_accuracy = np.mean([float(a) for a in bin_actuals])
+        bin_weight = len(bin_preds) / total
+        ece += bin_weight * abs(avg_confidence - avg_accuracy)
+
+    return float(ece)
+
+
+def compute_brier_score(predictions: List[float], actuals: List[bool]) -> float:
+    """Compute Brier score for probability calibration."""
+    if not predictions:
+        return 1.0
+    return float(np.mean([
+        (p - float(a)) ** 2 for p, a in zip(predictions, actuals)
+    ]))
+
+
+def compute_auroc(predictions: List[float], actuals: List[bool]) -> float:
+    """Compute AUROC for self-evaluation discrimination ability."""
+    if not predictions or len(set(actuals)) < 2:
+        return 0.5
+
+    # Simple AUROC computation
+    pairs = list(zip(predictions, actuals))
+    pairs.sort(key=lambda x: -x[0])
+
+    tp, fp, prev_score = 0, 0, None
+    tps, fps = [0], [0]
+
+    for score, label in pairs:
+        if score != prev_score:
+            tps.append(tp)
+            fps.append(fp)
+            prev_score = score
+        if label:
+            tp += 1
+        else:
+            fp += 1
+
+    tps.append(tp)
+    fps.append(fp)
+
+    if tp == 0 or fp == 0:
+        return 0.5
+
+    # Trapezoidal integration
+    auroc = 0.0
+    for i in range(1, len(tps)):
+        auroc += (fps[i] - fps[i-1]) * (tps[i] + tps[i-1]) / 2
+    auroc /= (tp * fp)
+    return float(auroc)
+
+
+class MetacognitionMetrics:
+    """Comprehensive evaluation of agent metacognitive ability."""
+
+    def __init__(self, config: Dict[str, Any] = None):
+        self.config = config or {}
+        self.predictions: List[float] = []
+        self.actuals: List[bool] = []
+
+    def update(self, prediction: float, actual: bool):
+        """Add a single prediction-outcome pair."""
+        self.predictions.append(prediction)
+        self.actuals.append(actual)
+
+    def update_batch(self, predictions: List[float], actuals: List[bool]):
+        """Add batch of predictions."""
+        self.predictions.extend(predictions)
+        self.actuals.extend(actuals)
+
+    def compute_all(self) -> Dict[str, float]:
+        """Compute all metacognition metrics."""
+        return {
+            "self_eval_accuracy": compute_self_eval_accuracy(self.predictions, self.actuals),
+            "ece": compute_ece(self.predictions, self.actuals),
+            "brier_score": compute_brier_score(self.predictions, self.actuals),
+            "auroc": compute_auroc(self.predictions, self.actuals),
+            "avg_confidence": float(np.mean(self.predictions)) if self.predictions else 0.0,
+            "avg_accuracy": float(np.mean([float(a) for a in self.actuals])) if self.actuals else 0.0,
+            "overconfidence": self._compute_overconfidence(),
+            "num_samples": len(self.predictions),
+        }
+
+    def _compute_overconfidence(self) -> float:
+        """Compute average overconfidence (confidence - accuracy when wrong)."""
+        wrong = [(p, a) for p, a in zip(self.predictions, self.actuals) if not a]
+        if not wrong:
+            return 0.0
+        return float(np.mean([p for p, _ in wrong]))
+
+    def reset(self):
+        """Reset accumulated metrics."""
+        self.predictions.clear()
+        self.actuals.clear()
+
+    def summary(self) -> str:
+        """Return formatted summary string."""
+        metrics = self.compute_all()
+        lines = ["--- Metacognition Metrics ---"]
+        for k, v in metrics.items():
+            lines.append(f"{k:24s}: {v:.4f}" if isinstance(v, float) else f"{k:24s}: {v}")
+        return "\n".join(lines)

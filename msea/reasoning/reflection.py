@@ -1,0 +1,122 @@
+"""
+Self-Reflection Engine — Generates metacognitive reflections on agent behavior.
+Implements Reflexion-style iterative improvement through self-reflection.
+"""
+
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
+import time
+
+
+@dataclass
+class Reflection:
+    """A metacognitive reflection on past performance."""
+    episode_id: int
+    success: bool
+    reflection_text: str
+    identified_errors: List[str] = field(default_factory=list)
+    proposed_improvements: List[str] = field(default_factory=list)
+    confidence_calibration: float = 0.0  # How off was confidence?
+    timestamp: float = field(default_factory=time.time)
+
+
+class ReflectionEngine:
+    """
+    Generates and stores self-reflections for learning from experience.
+
+    Inspired by Reflexion (Shinn et al., 2023): the agent reflects on
+    failures and successes to improve future performance.
+    """
+
+    def __init__(self, config: Dict[str, Any]):
+        self.config = config
+        self.reflection_memory: List[Reflection] = []
+        self.max_memory = config.get("max_memory", 100)
+        self.reflection_depth = config.get("reflection_depth", 3)
+
+    def reflect(self, episode_id: int, predicted_confidence: float,
+                actual_success: bool, reasoning_trace: str) -> Reflection:
+        """Generate a reflection on an episode."""
+        # Analyze the gap between prediction and reality
+        calibration_error = abs(predicted_confidence - float(actual_success))
+
+        # Identify potential errors
+        errors = self._identify_errors(reasoning_trace, actual_success)
+
+        # Propose improvements
+        improvements = self._propose_improvements(errors, calibration_error)
+
+        reflection = Reflection(
+            episode_id=episode_id,
+            success=actual_success,
+            reflection_text=self._generate_reflection_text(
+                actual_success, errors, improvements, calibration_error
+            ),
+            identified_errors=errors,
+            proposed_improvements=improvements,
+            confidence_calibration=calibration_error,
+        )
+
+        self._store_reflection(reflection)
+        return reflection
+
+    def get_relevant_reflections(self, context: str, k: int = 3) -> List[Reflection]:
+        """Retrieve k most relevant past reflections."""
+        # Simple: return most recent reflections
+        return self.reflection_memory[-k:]
+
+    def get_improvement_suggestions(self) -> List[str]:
+        """Aggregate improvement suggestions from recent reflections."""
+        recent = self.reflection_memory[-10:]
+        suggestions = []
+        for r in recent:
+            suggestions.extend(r.proposed_improvements)
+        # Deduplicate
+        return list(dict.fromkeys(suggestions))
+
+    def get_calibration_trend(self) -> float:
+        """Get average calibration error trend."""
+        if not self.reflection_memory:
+            return 0.5
+        recent = self.reflection_memory[-20:]
+        return sum(r.confidence_calibration for r in recent) / len(recent)
+
+    def _identify_errors(self, trace: str, success: bool) -> List[str]:
+        """Identify potential errors in reasoning."""
+        errors = []
+        if not success:
+            errors.append("Reasoning did not lead to correct answer")
+            if "uncertain" in trace.lower():
+                errors.append("Expressed uncertainty but did not adapt strategy")
+            if "maybe" in trace.lower() or "perhaps" in trace.lower():
+                errors.append("Hedging language suggests low confidence reasoning")
+        return errors
+
+    def _propose_improvements(self, errors: List[str], cal_error: float) -> List[str]:
+        """Propose improvements based on identified errors."""
+        improvements = []
+        if cal_error > 0.3:
+            improvements.append("Improve confidence calibration — predictions are poorly calibrated")
+        if any("uncertain" in e for e in errors):
+            improvements.append("When uncertain, use tools or request more information")
+        if any("correct" not in e for e in errors):
+            improvements.append("Consider alternative reasoning paths before committing")
+        return improvements
+
+    def _generate_reflection_text(self, success: bool, errors: List[str],
+                                   improvements: List[str], cal_error: float) -> str:
+        """Generate natural language reflection."""
+        status = "succeeded" if success else "failed"
+        text = f"This episode {status}. "
+        if errors:
+            text += f"Identified {len(errors)} potential issues: {'; '.join(errors)}. "
+        if improvements:
+            text += f"Suggested improvements: {'; '.join(improvements)}. "
+        text += f"Calibration error: {cal_error:.3f}."
+        return text
+
+    def _store_reflection(self, reflection: Reflection):
+        """Store reflection in memory with capacity management."""
+        self.reflection_memory.append(reflection)
+        if len(self.reflection_memory) > self.max_memory:
+            self.reflection_memory = self.reflection_memory[-self.max_memory:]

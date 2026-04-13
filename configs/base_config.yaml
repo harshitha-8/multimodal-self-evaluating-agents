@@ -1,0 +1,58 @@
+# Base Configuration for Multimodal Self-Evaluating Agents
+# This config is the starting point that the agent modifies.
+
+experiment:
+  name: "baseline"
+  seed: 42
+  max_samples: 500
+  benchmark: "synthetic_metacognition"
+  log_dir: "results"
+
+agent:
+  type: "metacognitive"
+  name: "MetacognitiveAgent-v1"
+  max_reasoning_steps: 8
+  confidence_threshold: 0.7
+  verbose: false
+
+  # Metacognitive parameters
+  reflection_frequency: 3
+  calibration_window: 50
+  adaptation_threshold: 0.3
+  max_refinement_rounds: 3
+  confidence_bias: 0.0
+  uncertainty_scale: 1.0
+  reflection_depth: 2
+
+perception:
+  encoders:
+    - name: "clip"
+      model_name: "ViT-B/16"
+      image_size: 224
+      embed_dim: 512
+  fusion_method: "concatenation"
+
+reasoning:
+  max_cot_steps: 8
+  visual_grounding: true
+  interleave_modalities: true
+  process_supervision: true
+  strictness: 0.5
+
+tools:
+  tool_budget: 5
+  uncertainty_tool_threshold: 0.6
+  available:
+    - retrieval
+    - visual_analysis
+    - code_executor
+    - consistency_check
+
+evaluation:
+  metrics:
+    - self_eval_accuracy
+    - ece
+    - brier_score
+    - auroc
+  calibration_bins: 10
+  consistency_threshold: 0.5

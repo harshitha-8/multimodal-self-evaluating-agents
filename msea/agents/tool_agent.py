@@ -1,0 +1,277 @@
+"""
+Tool-Augmented Agent — Agent that selectively invokes external tools
+based on uncertainty estimation and task requirements.
+
+Supports: retrieval, code execution, visual analysis, and custom tools.
+"""
+
+import time
+from dataclasses import dataclass, field
+from typing import Any, Callable, Dict, List, Optional, Tuple
+
+from msea.agents.base_agent import (
+    BaseAgent, AgentOutput, Observation, ReasoningTrace
+)
+
+
+@dataclass
+class ToolResult:
+    """Result from a tool invocation."""
+    tool_name: str
+    success: bool
+    output: Any
+    execution_time: float
+    error: Optional[str] = None
+
+
+@dataclass
+class Tool:
+    """A registered tool that the agent can use."""
+    name: str
+    description: str
+    fn: Callable
+    input_schema: Dict[str, str]
+    cost: float = 1.0         # Relative computational cost
+    reliability: float = 0.9  # Historical success rate
+
+
+class ToolRegistry:
+    """Registry of available tools with usage tracking."""
+
+    def __init__(self):
+        self.tools: Dict[str, Tool] = {}
+        self.usage_history: List[Tuple[str, bool, float]] = []
+
+    def register(self, name: str, description: str, fn: Callable,
+                 input_schema: Dict[str, str], cost: float = 1.0):
+        """Register a new tool."""
+        self.tools[name] = Tool(
+            name=name, description=description, fn=fn,
+            input_schema=input_schema, cost=cost,
+        )
+
+    def invoke(self, name: str, **kwargs) -> ToolResult:
+        """Invoke a registered tool with given arguments."""
+        if name not in self.tools:
+            return ToolResult(
+                tool_name=name, success=False, output=None,
+                execution_time=0.0, error=f"Tool '{name}' not found",
+            )
+
+        tool = self.tools[name]
+        t_start = time.time()
+        try:
+            result = tool.fn(**kwargs)
+            elapsed = time.time() - t_start
+            self.usage_history.append((name, True, elapsed))
+            tool.reliability = (tool.reliability * 0.9 + 0.1)  # EMA update
+            return ToolResult(
+                tool_name=name, success=True, output=result,
+                execution_time=elapsed,
+            )
+        except Exception as e:
+            elapsed = time.time() - t_start
+            self.usage_history.append((name, False, elapsed))
+            tool.reliability = tool.reliability * 0.9  # Decrease on failure
+            return ToolResult(
+                tool_name=name, success=False, output=None,
+                execution_time=elapsed, error=str(e),
+            )
+
+    def get_available_tools(self) -> List[str]:
+        return list(self.tools.keys())
+
+    def get_tool_descriptions(self) -> str:
+        lines = []
+        for name, tool in self.tools.items():
+            lines.append(f"- {name}: {tool.description} (cost={tool.cost:.1f}, "
+                        f"reliability={tool.reliability:.2f})")
+        return "\n".join(lines)
+
+
+class ToolAugmentedAgent(BaseAgent):
+    """
+    Agent that dynamically selects and invokes tools based on
+    uncertainty estimation and cost-benefit analysis.
+
+    Key innovation: the agent learns when to use tools vs. when
+    to rely on internal reasoning, optimizing the cost-accuracy tradeoff.
+    """
+
+    def __init__(self, config: Dict[str, Any]):
+        super().__init__(config)
+        self.name = config.get("name", "ToolAgent")
+        self.tool_registry = ToolRegistry()
+        self.tool_budget = config.get("tool_budget", 5)  # Max tool calls per instance
+        self.tool_calls_remaining = self.tool_budget
+        self.uncertainty_tool_threshold = config.get("uncertainty_tool_threshold", 0.6)
+
+        # Register default tools
+        self._register_default_tools()
+
+    def _register_default_tools(self):
+        """Register built-in tools."""
+        self.tool_registry.register(
+            name="retrieval",
+            description="Search knowledge base for relevant information",
+            fn=self._retrieval_tool,
+            input_schema={"query": "str"},
+            cost=0.5,
+        )
+        self.tool_registry.register(
+            name="visual_analysis",
+            description="Detailed visual analysis of an image region",
+            fn=self._visual_analysis_tool,
+            input_schema={"image": "tensor", "region": "str"},
+            cost=1.0,
+        )
+        self.tool_registry.register(
+            name="code_executor",
+            description="Execute code for computation or data analysis",
+            fn=self._code_executor_tool,
+            input_schema={"code": "str"},
+            cost=1.5,
+        )
+        self.tool_registry.register(
+            name="consistency_check",
+            description="Check consistency between visual and textual information",
+            fn=self._consistency_check_tool,
+            input_schema={"visual": "tensor", "text": "str"},
+            cost=0.8,
+        )
+
+    def perceive(self, observation: Observation) -> Dict[str, Any]:
+        """Process multimodal input with tool-awareness."""
+        features = {
+            "has_visual": observation.visual is not None,
+            "has_textual": observation.textual is not None,
+            "modalities": [],
+            "available_tools": self.tool_registry.get_available_tools(),
+            "tool_budget_remaining": self.tool_calls_remaining,
+        }
+
+        if observation.visual is not None:
+            features["modalities"].append("visual")
+        if observation.textual is not None:
+            features["modalities"].append("textual")
+        if observation.structured is not None:
+            features["modalities"].append("structured")
+
+        return features
+
+    def reason(self, features: Dict[str, Any], context: Optional[str] = None) -> ReasoningTrace:
+        """Reason with tool-use planning."""
+        # Decide tool vs. internal reasoning
+        tool_decision = self._plan_tool_use(features, context)
+
+        if tool_decision["use_tool"] and self.tool_calls_remaining > 0:
+            # Execute tool
+            tool_name = tool_decision["tool_name"]
+            tool_args = tool_decision.get("tool_args", {})
+            result = self.tool_registry.invoke(tool_name, **tool_args)
+            self.tool_calls_remaining -= 1
+
+            thought = (f"Used tool '{tool_name}': "
+                      f"{'success' if result.success else 'failed'}. "
+                      f"Result: {result.output}")
+            confidence = 0.7 if result.success else 0.3
+
+            return ReasoningTrace(
+                step_id=0,
+                thought=thought,
+                action=tool_name,
+                action_input=tool_args,
+                observation=str(result.output) if result.success else result.error,
+                confidence=confidence,
+                uncertainty=1.0 - confidence,
+                is_terminal=False,
+            )
+        else:
+            # Internal reasoning
+            thought = self._internal_reasoning(features, context)
+            confidence = 0.5
+            return ReasoningTrace(
+                step_id=0,
+                thought=thought,
+                confidence=confidence,
+                uncertainty=0.5,
+                is_terminal=confidence > self.confidence_threshold,
+            )
+
+    def self_evaluate(self, output: AgentOutput) -> float:
+        """Evaluate with tool-usage awareness."""
+        base_score = output.confidence
+
+        # Bonus for tool-supported conclusions
+        tool_bonus = min(0.1, len(output.tools_used) * 0.03)
+
+        # Penalty for exhausting tool budget needlessly
+        budget_penalty = 0.05 if self.tool_calls_remaining == 0 else 0.0
+
+        score = base_score + tool_bonus - budget_penalty
+        return max(0.0, min(1.0, score))
+
+    def estimate_uncertainty(self, features: Dict[str, Any]) -> float:
+        """Estimate uncertainty considering tool availability."""
+        base_uncertainty = 0.5
+        modality_count = len(features.get("modalities", []))
+        base_uncertainty -= 0.1 * modality_count
+
+        # Tools reduce uncertainty
+        if features.get("tool_budget_remaining", 0) > 0:
+            base_uncertainty -= 0.1
+
+        return max(0.0, min(1.0, base_uncertainty))
+
+    def _plan_tool_use(self, features: Dict, context: Optional[str]) -> Dict:
+        """Plan whether and which tool to use."""
+        if self.tool_calls_remaining <= 0:
+            return {"use_tool": False}
+
+        # Simple heuristic: use tools when multi-modal and uncertain
+        modalities = features.get("modalities", [])
+        if len(modalities) > 1:
+            return {
+                "use_tool": True,
+                "tool_name": "consistency_check",
+                "tool_args": {},
+            }
+        elif "textual" in modalities:
+            return {
+                "use_tool": True,
+                "tool_name": "retrieval",
+                "tool_args": {"query": context or ""},
+            }
+        return {"use_tool": False}
+
+    def _internal_reasoning(self, features: Dict, context: Optional[str]) -> str:
+        """Generate reasoning without tool use."""
+        return (f"Reasoning internally over {len(features.get('modalities', []))} "
+               f"modalities. No tool invocation needed at this step.")
+
+    # --- Default tool implementations ---
+
+    @staticmethod
+    def _retrieval_tool(query: str = "") -> str:
+        """Placeholder retrieval tool."""
+        return f"Retrieved relevant context for: {query}"
+
+    @staticmethod
+    def _visual_analysis_tool(**kwargs) -> str:
+        """Placeholder visual analysis tool."""
+        return "Visual analysis: detected objects and spatial relationships"
+
+    @staticmethod
+    def _code_executor_tool(code: str = "") -> str:
+        """Placeholder code execution tool."""
+        return f"Code executed successfully: {code[:50]}"
+
+    @staticmethod
+    def _consistency_check_tool(**kwargs) -> str:
+        """Placeholder consistency check tool."""
+        return "Cross-modal consistency: 0.85 (high agreement)"
+
+    def reset(self):
+        """Reset including tool budget."""
+        super().reset()
+        self.tool_calls_remaining = self.tool_budget

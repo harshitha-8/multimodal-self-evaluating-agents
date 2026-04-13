@@ -1,0 +1,61 @@
+"""
+Self-Evaluation Scorer — Evaluates how well agents predict their own performance.
+This is the primary metric for metacognitive ability.
+"""
+
+from typing import Any, Dict, List, Optional
+import numpy as np
+
+
+class SelfEvaluationScorer:
+    """
+    Score agent self-evaluation quality.
+    Measures the gap between what the agent thinks it knows
+    and what it actually knows.
+    """
+
+    def __init__(self, config: Dict[str, Any] = None):
+        self.config = config or {}
+
+    def score(self, agent_confidence: float, agent_answer: str,
+              ground_truth: str) -> Dict[str, float]:
+        """
+        Score a single self-evaluation instance.
+
+        Returns:
+            Dictionary with self-eval quality metrics.
+        """
+        is_correct = self._check_correctness(agent_answer, ground_truth)
+        confidence_error = abs(agent_confidence - float(is_correct))
+
+        return {
+            "is_correct": float(is_correct),
+            "agent_confidence": agent_confidence,
+            "confidence_error": confidence_error,
+            "overconfident": float(agent_confidence > 0.5 and not is_correct),
+            "underconfident": float(agent_confidence < 0.5 and is_correct),
+            "well_calibrated": float(confidence_error < 0.2),
+        }
+
+    def score_batch(self, confidences: List[float], answers: List[str],
+                    ground_truths: List[str]) -> Dict[str, float]:
+        """Score a batch of self-evaluations."""
+        results = [
+            self.score(c, a, gt)
+            for c, a, gt in zip(confidences, answers, ground_truths)
+        ]
+
+        # Aggregate
+        return {
+            "accuracy": np.mean([r["is_correct"] for r in results]),
+            "avg_confidence": np.mean([r["agent_confidence"] for r in results]),
+            "avg_confidence_error": np.mean([r["confidence_error"] for r in results]),
+            "overconfidence_rate": np.mean([r["overconfident"] for r in results]),
+            "underconfidence_rate": np.mean([r["underconfident"] for r in results]),
+            "calibration_rate": np.mean([r["well_calibrated"] for r in results]),
+            "num_samples": len(results),
+        }
+
+    def _check_correctness(self, answer: str, ground_truth: str) -> bool:
+        """Check if agent's answer matches ground truth."""
+        return answer.strip().lower() == ground_truth.strip().lower()

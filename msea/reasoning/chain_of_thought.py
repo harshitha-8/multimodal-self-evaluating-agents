@@ -1,0 +1,142 @@
+"""
+Chain-of-Thought generation and evaluation for multimodal reasoning.
+Supports both text-only and vision-language CoT.
+"""
+
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional, Tuple
+import time
+
+
+@dataclass
+class CoTStep:
+    """A single chain-of-thought step."""
+    step_num: int
+    thought: str
+    modality_focus: str = "text"  # which modality this step focuses on
+    confidence: float = 0.5
+    is_visual_grounding: bool = False
+    visual_reference: Optional[str] = None
+    timestamp: float = field(default_factory=time.time)
+
+
+@dataclass
+class CoTChain:
+    """Complete chain of thought."""
+    steps: List[CoTStep]
+    final_answer: str
+    total_confidence: float
+    modalities_used: List[str]
+    generation_time: float = 0.0
+
+    @property
+    def length(self) -> int:
+        return len(self.steps)
+
+    def to_text(self) -> str:
+        """Convert chain to readable text."""
+        lines = []
+        for step in self.steps:
+            prefix = f"[{step.modality_focus.upper()}]" if step.modality_focus else ""
+            lines.append(f"Step {step.step_num}: {prefix} {step.thought}")
+        lines.append(f"\nAnswer: {self.final_answer}")
+        lines.append(f"Confidence: {self.total_confidence:.2f}")
+        return "\n".join(lines)
+
+
+class ChainOfThought:
+    """
+    Generates and evaluates chain-of-thought reasoning over multimodal inputs.
+
+    Key features:
+    1. Interleaved visual-textual reasoning steps
+    2. Visual grounding (connecting text reasoning to image regions)
+    3. Step-level confidence estimation
+    4. Coherence evaluation
+    """
+
+    def __init__(self, config: Dict[str, Any]):
+        self.config = config
+        self.max_steps = config.get("max_steps", 8)
+        self.min_confidence = config.get("min_confidence", 0.3)
+        self.visual_grounding = config.get("visual_grounding", True)
+        self.interleave_modalities = config.get("interleave_modalities", True)
+
+    def generate(self, query: str, visual_features: Optional[Any] = None,
+                 context: Optional[str] = None) -> CoTChain:
+        """Generate a chain-of-thought for the given query."""
+        t_start = time.time()
+        steps = []
+        modalities_used = ["text"]
+        if visual_features is not None:
+            modalities_used.append("visual")
+
+        # Step 1: Understand the question
+        steps.append(CoTStep(
+            step_num=1,
+            thought=f"Understanding the query: {query}",
+            modality_focus="text",
+            confidence=0.8,
+        ))
+
+        # Step 2: Visual analysis (if available)
+        if visual_features is not None:
+            steps.append(CoTStep(
+                step_num=2,
+                thought="Analyzing visual input for relevant information.",
+                modality_focus="visual",
+                confidence=0.6,
+                is_visual_grounding=True,
+            ))
+
+        # Step 3: Integration
+        steps.append(CoTStep(
+            step_num=len(steps) + 1,
+            thought="Integrating information across modalities.",
+            modality_focus="multimodal",
+            confidence=0.5,
+        ))
+
+        # Step 4: Conclusion
+        steps.append(CoTStep(
+            step_num=len(steps) + 1,
+            thought="Forming conclusion based on integrated evidence.",
+            modality_focus="text",
+            confidence=0.6,
+        ))
+
+        total_confidence = sum(s.confidence for s in steps) / len(steps)
+
+        return CoTChain(
+            steps=steps,
+            final_answer=f"Answer based on {len(modalities_used)}-modal reasoning: [placeholder]",
+            total_confidence=total_confidence,
+            modalities_used=modalities_used,
+            generation_time=time.time() - t_start,
+        )
+
+    def evaluate_coherence(self, chain: CoTChain) -> float:
+        """Evaluate the coherence of a reasoning chain."""
+        if chain.length < 2:
+            return 1.0
+
+        # Check confidence trajectory (should be non-decreasing ideally)
+        confidences = [s.confidence for s in chain.steps]
+        monotonic_violations = sum(
+            1 for i in range(1, len(confidences))
+            if confidences[i] < confidences[i-1] - 0.1
+        )
+        monotonic_score = 1.0 - monotonic_violations / max(1, len(confidences) - 1)
+
+        # Check modality coverage
+        modalities = set(s.modality_focus for s in chain.steps)
+        coverage_score = len(modalities) / 3  # Out of text, visual, multimodal
+
+        return 0.6 * monotonic_score + 0.4 * min(1.0, coverage_score)
+
+    def evaluate_grounding(self, chain: CoTChain) -> float:
+        """Evaluate visual grounding quality."""
+        grounded_steps = [s for s in chain.steps if s.is_visual_grounding]
+        if not grounded_steps:
+            return 0.5  # Neutral if no grounding expected
+        return sum(s.confidence for s in grounded_steps) / len(grounded_steps)
