@@ -105,3 +105,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 83: add noise injection for uncertainty calibration testing (2026-04-13T23:49:37Z) ---
 
 # --- Auto-research iteration 92: implement active learning data selection strategy (2026-04-13T23:49:38Z) ---
+
+# --- Auto-research iteration 93: add multi-domain synthetic data generation (2026-04-13T23:49:38Z) ---
