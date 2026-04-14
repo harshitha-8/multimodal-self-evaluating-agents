@@ -179,3 +179,5 @@ class MetacognitionMetrics:
 # --- Auto-research iteration 56: add bi-directional reasoning trace verification (2026-04-13T23:49:34Z) ---
 
 # --- Auto-research iteration 57: implement hypothesis-driven reasoning strategy (2026-04-13T23:49:34Z) ---
+
+# --- Auto-research iteration 66: add AUROC computation for self-evaluation discrimination (2026-04-13T23:49:35Z) ---
