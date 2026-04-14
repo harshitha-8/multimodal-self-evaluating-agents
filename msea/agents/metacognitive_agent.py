@@ -501,3 +501,5 @@ class MetacognitiveAgent(BaseAgent):
 # --- Auto-research iteration 61: add stratified ECE computation by difficulty level (2026-04-13T23:49:35Z) ---
 
 # --- Auto-research iteration 70: implement cross-validation for robust metric estimation (2026-04-13T23:49:36Z) ---
+
+# --- Auto-research iteration 71: add hallucination detection benchmark suite (2026-04-13T23:49:36Z) ---
