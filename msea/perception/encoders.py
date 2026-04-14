@@ -164,3 +164,5 @@ def get_encoder(name: str, config: Optional[Dict] = None) -> VisionEncoder:
 # --- Auto-research iteration 53: add reasoning chain compression for context efficiency (2026-04-13T23:49:34Z) ---
 
 # --- Auto-research iteration 62: implement reliability diagram visualization (2026-04-13T23:49:35Z) ---
+
+# --- Auto-research iteration 63: add per-modality metacognition accuracy tracking (2026-04-13T23:49:35Z) ---
