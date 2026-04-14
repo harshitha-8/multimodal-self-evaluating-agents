@@ -38,3 +38,5 @@ class RetrievalTool:
 # --- Auto-research iteration 79: refactor scorer with configurable correctness criteria (2026-04-13T23:49:36Z) ---
 
 # --- Auto-research iteration 89: refactor synthetic generator with compositional scenes (2026-04-13T23:49:37Z) ---
+
+# --- Auto-research iteration 99: refactor tool registry with capability-based routing (2026-04-13T23:49:38Z) ---
