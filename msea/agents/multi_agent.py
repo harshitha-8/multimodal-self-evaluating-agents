@@ -203,3 +203,5 @@ class MultiAgentCoordinator(BaseAgent):
 # --- Auto-research iteration 71: add hallucination detection benchmark suite (2026-04-13T23:49:36Z) ---
 
 # --- Auto-research iteration 80: implement evaluation dashboard generation (2026-04-13T23:49:37Z) ---
+
+# --- Auto-research iteration 81: add difficulty-controlled synthetic data generation (2026-04-13T23:49:37Z) ---
