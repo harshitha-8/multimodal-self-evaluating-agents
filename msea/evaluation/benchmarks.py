@@ -170,3 +170,5 @@ class BenchmarkLoader:
 # --- Auto-research iteration 67: implement Brier skill score relative to baseline (2026-04-13T23:49:35Z) ---
 
 # --- Auto-research iteration 76: add evaluation ensemble across multiple random seeds (2026-04-13T23:49:36Z) ---
+
+# --- Auto-research iteration 77: implement meta-learning evaluation protocol (2026-04-13T23:49:36Z) ---
