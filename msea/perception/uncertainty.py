@@ -213,3 +213,5 @@ class PerceptualUncertainty:
 # --- Auto-research iteration 153: add entropy-based uncertainty estimation to base agent (2026-04-13T23:49:43Z) ---
 
 # --- Auto-research iteration 162: implement speculation execution for parallel tool calls (2026-04-13T23:49:44Z) ---
+
+# --- Auto-research iteration 163: add agent serialization for experiment reproducibility (2026-04-13T23:49:44Z) ---
