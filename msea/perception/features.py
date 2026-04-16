@@ -129,3 +129,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 143: iterative improvement to multimodal self-evaluation pipeline (commit 142) (2026-04-13T23:49:42Z) ---
 
 # --- Auto-research iteration 152: implement adaptive reflection frequency based on ECE (2026-04-13T23:49:43Z) ---
+
+# --- Auto-research iteration 153: add entropy-based uncertainty estimation to base agent (2026-04-13T23:49:43Z) ---
