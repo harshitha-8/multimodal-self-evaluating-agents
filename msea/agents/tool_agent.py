@@ -337,3 +337,5 @@ class ToolAugmentedAgent(BaseAgent):
 # --- Auto-research iteration 150: iterative improvement to multimodal self-evaluation pipeline (commit 149) (2026-04-13T23:49:43Z) ---
 
 # --- Auto-research iteration 151: add confidence decay schedule to metacognitive loop (2026-04-13T23:49:43Z) ---
+
+# --- Auto-research iteration 160: refactor tool selection with cost-benefit scoring (2026-04-13T23:49:43Z) ---
