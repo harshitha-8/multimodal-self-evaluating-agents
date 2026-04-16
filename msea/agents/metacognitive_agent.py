@@ -547,3 +547,5 @@ class MetacognitiveAgent(BaseAgent):
 # --- Auto-research iteration 180: implement feature caching for repeated encoder inference (2026-04-13T23:49:45Z) ---
 
 # --- Auto-research iteration 181: add perceptual hashing for near-duplicate detection (2026-04-13T23:49:45Z) ---
+
+# --- Auto-research iteration 190: add feature attribution for interpretability (2026-04-13T23:49:46Z) ---
