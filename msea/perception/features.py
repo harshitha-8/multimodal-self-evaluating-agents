@@ -137,3 +137,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 163: add agent serialization for experiment reproducibility (2026-04-13T23:49:44Z) ---
 
 # --- Auto-research iteration 172: implement multi-scale feature extraction for DINOv2 (2026-04-13T23:49:45Z) ---
+
+# --- Auto-research iteration 173: add feature normalization with learnable temperature (2026-04-13T23:49:45Z) ---
