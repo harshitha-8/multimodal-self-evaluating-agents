@@ -322,3 +322,5 @@ class BaseAgent(ABC):
 # --- Auto-research iteration 151: add confidence decay schedule to metacognitive loop (2026-04-13T23:49:43Z) ---
 
 # --- Auto-research iteration 160: refactor tool selection with cost-benefit scoring (2026-04-13T23:49:43Z) ---
+
+# --- Auto-research iteration 161: add multi-round debate protocol to multi-agent coordinator (2026-04-13T23:49:44Z) ---
