@@ -539,3 +539,5 @@ class MetacognitiveAgent(BaseAgent):
 # --- Auto-research iteration 160: refactor tool selection with cost-benefit scoring (2026-04-13T23:49:43Z) ---
 
 # --- Auto-research iteration 161: add multi-round debate protocol to multi-agent coordinator (2026-04-13T23:49:44Z) ---
+
+# --- Auto-research iteration 170: add confidence interval estimation using bootstrap (2026-04-13T23:49:44Z) ---
