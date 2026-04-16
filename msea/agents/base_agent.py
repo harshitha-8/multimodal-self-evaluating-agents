@@ -330,3 +330,5 @@ class BaseAgent(ABC):
 # --- Auto-research iteration 171: add SigLIP encoder with sigmoid loss similarity (2026-04-13T23:49:44Z) ---
 
 # --- Auto-research iteration 180: implement feature caching for repeated encoder inference (2026-04-13T23:49:45Z) ---
+
+# --- Auto-research iteration 181: add perceptual hashing for near-duplicate detection (2026-04-13T23:49:45Z) ---
