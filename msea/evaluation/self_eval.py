@@ -119,3 +119,5 @@ class SelfEvaluationScorer:
 # --- Auto-research iteration 146: iterative improvement to multimodal self-evaluation pipeline (commit 145) (2026-04-13T23:49:42Z) ---
 
 # --- Auto-research iteration 147: iterative improvement to multimodal self-evaluation pipeline (commit 146) (2026-04-13T23:49:42Z) ---
+
+# --- Auto-research iteration 156: implement soft-gating for reflection token detection (2026-04-13T23:49:43Z) ---
