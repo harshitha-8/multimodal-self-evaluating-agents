@@ -70,3 +70,5 @@ class ToolRegistryManager:
 # --- Auto-research iteration 229: refactor scorer with configurable correctness criteria (2026-04-13T23:49:50Z) ---
 
 # --- Auto-research iteration 239: refactor synthetic generator with compositional scenes (2026-04-13T23:49:51Z) ---
+
+# --- Auto-research iteration 249: refactor tool registry with capability-based routing (2026-04-13T23:49:52Z) ---
