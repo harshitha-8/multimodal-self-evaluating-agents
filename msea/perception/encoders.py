@@ -228,3 +228,5 @@ def get_encoder(name: str, config: Optional[Dict] = None) -> VisionEncoder:
 # --- Auto-research iteration 213: add per-modality metacognition accuracy tracking (2026-04-13T23:49:48Z) ---
 
 # --- Auto-research iteration 222: implement evaluation with domain shift simulation (2026-04-13T23:49:49Z) ---
+
+# --- Auto-research iteration 223: add temporal evaluation tracking across experiments (2026-04-13T23:49:49Z) ---
