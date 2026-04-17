@@ -222,3 +222,5 @@ class SelfCritique:
 # --- Auto-research iteration 225: implement evaluation result caching for rapid iteration (2026-04-13T23:49:49Z) ---
 
 # --- Auto-research iteration 234: refactor dataset loader with lazy loading support (2026-04-13T23:49:50Z) ---
+
+# --- Auto-research iteration 235: implement data curriculum based on agent performance (2026-04-13T23:49:50Z) ---
