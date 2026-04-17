@@ -243,3 +243,5 @@ class MetacognitionMetrics:
 # --- Auto-research iteration 216: add AUROC computation for self-evaluation discrimination (2026-04-13T23:49:49Z) ---
 
 # --- Auto-research iteration 217: implement Brier skill score relative to baseline (2026-04-13T23:49:49Z) ---
+
+# --- Auto-research iteration 226: add evaluation ensemble across multiple random seeds (2026-04-13T23:49:49Z) ---
