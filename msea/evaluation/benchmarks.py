@@ -234,3 +234,5 @@ class BenchmarkLoader:
 # --- Auto-research iteration 227: implement meta-learning evaluation protocol (2026-04-13T23:49:50Z) ---
 
 # --- Auto-research iteration 236: add synthetic visual reasoning scenarios (2026-04-13T23:49:50Z) ---
+
+# --- Auto-research iteration 237: implement cross-modal data mixing strategies (2026-04-13T23:49:50Z) ---
