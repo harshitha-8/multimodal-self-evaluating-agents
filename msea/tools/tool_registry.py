@@ -62,3 +62,5 @@ class ToolRegistryManager:
 # --- Auto-research iteration 189: implement contrastive feature learning objective (2026-04-13T23:49:46Z) ---
 
 # --- Auto-research iteration 199: refactor critique module with multi-dimensional scoring (2026-04-13T23:49:47Z) ---
+
+# --- Auto-research iteration 209: refactor CoT generation with modality-aware templating (2026-04-13T23:49:48Z) ---
