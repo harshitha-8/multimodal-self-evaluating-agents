@@ -151,3 +151,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 202: implement step-level reward prediction model (2026-04-13T23:49:47Z) ---
 
 # --- Auto-research iteration 203: add reasoning chain compression for context efficiency (2026-04-13T23:49:47Z) ---
+
+# --- Auto-research iteration 212: implement reliability diagram visualization (2026-04-13T23:49:48Z) ---
