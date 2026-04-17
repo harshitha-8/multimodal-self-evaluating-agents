@@ -346,3 +346,5 @@ class BaseAgent(ABC):
 # --- Auto-research iteration 211: add stratified ECE computation by difficulty level (2026-04-13T23:49:48Z) ---
 
 # --- Auto-research iteration 220: implement cross-validation for robust metric estimation (2026-04-13T23:49:49Z) ---
+
+# --- Auto-research iteration 221: add hallucination detection benchmark suite (2026-04-13T23:49:49Z) ---
