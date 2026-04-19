@@ -248,3 +248,5 @@ class ReflectionEngine:
 # --- Auto-research iteration 314: implement gradient-free hyperparameter adaptation (2026-04-13T23:49:58Z) ---
 
 # --- Auto-research iteration 315: add online calibration update with exponential smoothing (2026-04-13T23:49:58Z) ---
+
+# --- Auto-research iteration 324: refactor encoder factory to support custom backbones (2026-04-13T23:49:59Z) ---
