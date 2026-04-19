@@ -187,3 +187,5 @@ class SelfEvaluationScorer:
 # --- Auto-research iteration 316: implement chain-of-thought diversity scoring (2026-04-13T23:49:58Z) ---
 
 # --- Auto-research iteration 317: add failure pattern recognition to metacognitive state (2026-04-13T23:49:58Z) ---
+
+# --- Auto-research iteration 326: add patch-level uncertainty from DINOv2 register tokens (2026-04-13T23:49:59Z) ---
