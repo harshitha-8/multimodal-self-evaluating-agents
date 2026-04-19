@@ -262,3 +262,5 @@ class SelfCritique:
 # --- Auto-research iteration 325: implement attention rollout for visual explanation (2026-04-13T23:49:59Z) ---
 
 # --- Auto-research iteration 334: implement visual feature memory bank with FAISS (2026-04-13T23:50:00Z) ---
+
+# --- Auto-research iteration 335: add adaptive image preprocessing based on content type (2026-04-13T23:50:00Z) ---
