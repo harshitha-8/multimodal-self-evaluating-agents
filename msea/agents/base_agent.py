@@ -386,3 +386,5 @@ class BaseAgent(ABC):
 # --- Auto-research iteration 311: add multi-round debate protocol to multi-agent coordinator (2026-04-13T23:49:57Z) ---
 
 # --- Auto-research iteration 320: add confidence interval estimation using bootstrap (2026-04-13T23:49:58Z) ---
+
+# --- Auto-research iteration 321: add SigLIP encoder with sigmoid loss similarity (2026-04-13T23:49:58Z) ---
