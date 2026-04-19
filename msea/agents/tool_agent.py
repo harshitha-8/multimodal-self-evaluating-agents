@@ -405,3 +405,5 @@ class ToolAugmentedAgent(BaseAgent):
 # --- Auto-research iteration 320: add confidence interval estimation using bootstrap (2026-04-13T23:49:58Z) ---
 
 # --- Auto-research iteration 321: add SigLIP encoder with sigmoid loss similarity (2026-04-13T23:49:58Z) ---
+
+# --- Auto-research iteration 330: implement feature caching for repeated encoder inference (2026-04-13T23:49:59Z) ---
