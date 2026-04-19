@@ -272,3 +272,5 @@ class BenchmarkLoader:
 # --- Auto-research iteration 326: add patch-level uncertainty from DINOv2 register tokens (2026-04-13T23:49:59Z) ---
 
 # --- Auto-research iteration 327: implement cross-encoder consistency scoring (2026-04-13T23:49:59Z) ---
+
+# --- Auto-research iteration 336: implement feature distillation from teacher encoder (2026-04-13T23:50:00Z) ---
