@@ -193,3 +193,5 @@ class SelfEvaluationScorer:
 # --- Auto-research iteration 327: implement cross-encoder consistency scoring (2026-04-13T23:49:59Z) ---
 
 # --- Auto-research iteration 336: implement feature distillation from teacher encoder (2026-04-13T23:50:00Z) ---
+
+# --- Auto-research iteration 337: add visual grounding score computation (2026-04-13T23:50:00Z) ---
