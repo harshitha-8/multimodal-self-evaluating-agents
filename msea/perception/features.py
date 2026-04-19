@@ -187,3 +187,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 292: iterative improvement to multimodal self-evaluation pipeline (commit 291) (2026-04-13T23:49:55Z) ---
 
 # --- Auto-research iteration 293: iterative improvement to multimodal self-evaluation pipeline (commit 292) (2026-04-13T23:49:56Z) ---
+
+# --- Auto-research iteration 302: implement adaptive reflection frequency based on ECE (2026-04-13T23:49:56Z) ---
