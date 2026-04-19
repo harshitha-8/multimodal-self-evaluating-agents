@@ -260,3 +260,5 @@ class ChainOfThought:
 # --- Auto-research iteration 294: iterative improvement to multimodal self-evaluation pipeline (commit 293) (2026-04-13T23:49:56Z) ---
 
 # --- Auto-research iteration 295: iterative improvement to multimodal self-evaluation pipeline (commit 294) (2026-04-13T23:49:56Z) ---
+
+# --- Auto-research iteration 304: refactor agent state machine with explicit transitions (2026-04-13T23:49:56Z) ---
