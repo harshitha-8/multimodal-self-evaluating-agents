@@ -193,3 +193,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 303: add entropy-based uncertainty estimation to base agent (2026-04-13T23:49:56Z) ---
 
 # --- Auto-research iteration 312: implement speculation execution for parallel tool calls (2026-04-13T23:49:57Z) ---
+
+# --- Auto-research iteration 313: add agent serialization for experiment reproducibility (2026-04-13T23:49:57Z) ---
