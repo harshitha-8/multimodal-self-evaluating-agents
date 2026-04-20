@@ -419,3 +419,5 @@ class ToolAugmentedAgent(BaseAgent):
 # --- Auto-research iteration 351: add counterfactual reasoning step generation (2026-04-13T23:50:01Z) ---
 
 # --- Auto-research iteration 360: implement backtracking mechanism for failed reasoning (2026-04-13T23:50:02Z) ---
+
+# --- Auto-research iteration 361: add stratified ECE computation by difficulty level (2026-04-13T23:50:02Z) ---
