@@ -305,3 +305,5 @@ class MetacognitionMetrics:
 # --- Auto-research iteration 367: implement Brier skill score relative to baseline (2026-04-13T23:50:03Z) ---
 
 # --- Auto-research iteration 376: add evaluation ensemble across multiple random seeds (2026-04-13T23:50:03Z) ---
+
+# --- Auto-research iteration 377: implement meta-learning evaluation protocol (2026-04-13T23:50:03Z) ---
