@@ -427,3 +427,5 @@ class ToolAugmentedAgent(BaseAgent):
 # --- Auto-research iteration 371: add hallucination detection benchmark suite (2026-04-13T23:50:03Z) ---
 
 # --- Auto-research iteration 380: implement evaluation dashboard generation (2026-04-13T23:50:04Z) ---
+
+# --- Auto-research iteration 381: add difficulty-controlled synthetic data generation (2026-04-13T23:50:04Z) ---
