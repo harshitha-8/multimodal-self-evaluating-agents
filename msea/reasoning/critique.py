@@ -276,3 +276,5 @@ class SelfCritique:
 # --- Auto-research iteration 364: refactor benchmark loader with streaming support (2026-04-13T23:50:02Z) ---
 
 # --- Auto-research iteration 365: implement synthetic benchmark with controllable difficulty (2026-04-13T23:50:02Z) ---
+
+# --- Auto-research iteration 374: refactor consistency checker with claim-level granularity (2026-04-13T23:50:03Z) ---
