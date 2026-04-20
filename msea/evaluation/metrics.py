@@ -301,3 +301,5 @@ class MetacognitionMetrics:
 # --- Auto-research iteration 357: implement hypothesis-driven reasoning strategy (2026-04-13T23:50:02Z) ---
 
 # --- Auto-research iteration 366: add AUROC computation for self-evaluation discrimination (2026-04-13T23:50:02Z) ---
+
+# --- Auto-research iteration 367: implement Brier skill score relative to baseline (2026-04-13T23:50:03Z) ---
