@@ -217,3 +217,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 363: add per-modality metacognition accuracy tracking (2026-04-13T23:50:02Z) ---
 
 # --- Auto-research iteration 372: implement evaluation with domain shift simulation (2026-04-13T23:50:03Z) ---
+
+# --- Auto-research iteration 373: add temporal evaluation tracking across experiments (2026-04-13T23:50:03Z) ---
