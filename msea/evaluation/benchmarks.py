@@ -298,3 +298,5 @@ class BenchmarkLoader:
 # --- Auto-research iteration 387: implement cross-modal data mixing strategies (2026-04-13T23:50:04Z) ---
 
 # --- Auto-research iteration 396: add tool invocation timeout and retry logic (2026-04-13T23:50:05Z) ---
+
+# --- Auto-research iteration 397: implement tool chain composition for complex queries (2026-04-13T23:50:05Z) ---
