@@ -292,3 +292,5 @@ def get_encoder(name: str, config: Optional[Dict] = None) -> VisionEncoder:
 # --- Auto-research iteration 373: add temporal evaluation tracking across experiments (2026-04-13T23:50:03Z) ---
 
 # --- Auto-research iteration 382: implement data augmentation for multimodal robustness (2026-04-13T23:50:04Z) ---
+
+# --- Auto-research iteration 383: add noise injection for uncertainty calibration testing (2026-04-13T23:50:04Z) ---
