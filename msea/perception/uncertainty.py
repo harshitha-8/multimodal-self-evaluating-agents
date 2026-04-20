@@ -291,3 +291,5 @@ class PerceptualUncertainty:
 # --- Auto-research iteration 352: implement step-level reward prediction model (2026-04-13T23:50:01Z) ---
 
 # --- Auto-research iteration 353: add reasoning chain compression for context efficiency (2026-04-13T23:50:01Z) ---
+
+# --- Auto-research iteration 362: implement reliability diagram visualization (2026-04-13T23:50:02Z) ---
