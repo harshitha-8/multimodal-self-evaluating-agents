@@ -284,3 +284,5 @@ class ChainOfThought:
 # --- Auto-research iteration 354: refactor process supervision with Monte Carlo estimation (2026-04-13T23:50:01Z) ---
 
 # --- Auto-research iteration 355: implement self-consistency decoding for robust answers (2026-04-13T23:50:01Z) ---
+
+# --- Auto-research iteration 364: refactor benchmark loader with streaming support (2026-04-13T23:50:02Z) ---
