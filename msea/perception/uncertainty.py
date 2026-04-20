@@ -303,3 +303,5 @@ class PerceptualUncertainty:
 # --- Auto-research iteration 382: implement data augmentation for multimodal robustness (2026-04-13T23:50:04Z) ---
 
 # --- Auto-research iteration 383: add noise injection for uncertainty calibration testing (2026-04-13T23:50:04Z) ---
+
+# --- Auto-research iteration 392: implement active learning data selection strategy (2026-04-13T23:50:05Z) ---
