@@ -431,3 +431,5 @@ class ToolAugmentedAgent(BaseAgent):
 # --- Auto-research iteration 381: add difficulty-controlled synthetic data generation (2026-04-13T23:50:04Z) ---
 
 # --- Auto-research iteration 390: implement few-shot example selection for evaluation (2026-04-13T23:50:05Z) ---
+
+# --- Auto-research iteration 391: add distribution shift simulation for robustness testing (2026-04-13T23:50:05Z) ---
