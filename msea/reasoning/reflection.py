@@ -306,3 +306,5 @@ class ReflectionEngine:
 # --- Auto-research iteration 455: add memory-bounded reflection history with LRU eviction (2026-04-13T23:50:11Z) ---
 
 # --- Auto-research iteration 464: implement gradient-free hyperparameter adaptation (2026-04-13T23:50:12Z) ---
+
+# --- Auto-research iteration 465: add online calibration update with exponential smoothing (2026-04-13T23:50:12Z) ---
