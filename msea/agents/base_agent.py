@@ -440,3 +440,5 @@ class BaseAgent(ABC):
 # --- Auto-research iteration 450: iterative improvement to multimodal self-evaluation pipeline (commit 449) (2026-04-13T23:50:10Z) ---
 
 # --- Auto-research iteration 451: add confidence decay schedule to metacognitive loop (2026-04-13T23:50:10Z) ---
+
+# --- Auto-research iteration 460: refactor tool selection with cost-benefit scoring (2026-04-13T23:50:11Z) ---
