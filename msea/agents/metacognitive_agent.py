@@ -653,3 +653,5 @@ class MetacognitiveAgent(BaseAgent):
 # --- Auto-research iteration 441: iterative improvement to multimodal self-evaluation pipeline (commit 440) (2026-04-13T23:50:09Z) ---
 
 # --- Auto-research iteration 450: iterative improvement to multimodal self-evaluation pipeline (commit 449) (2026-04-13T23:50:10Z) ---
+
+# --- Auto-research iteration 451: add confidence decay schedule to metacognitive loop (2026-04-13T23:50:10Z) ---
