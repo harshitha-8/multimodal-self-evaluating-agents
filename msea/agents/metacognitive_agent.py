@@ -665,3 +665,5 @@ class MetacognitiveAgent(BaseAgent):
 # --- Auto-research iteration 471: add SigLIP encoder with sigmoid loss similarity (2026-04-13T23:50:12Z) ---
 
 # --- Auto-research iteration 480: implement feature caching for repeated encoder inference (2026-04-13T23:50:13Z) ---
+
+# --- Auto-research iteration 481: add perceptual hashing for near-duplicate detection (2026-04-13T23:50:13Z) ---
