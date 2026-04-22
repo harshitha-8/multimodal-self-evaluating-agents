@@ -257,3 +257,5 @@ class CrossModalConsistency:
 # --- Auto-research iteration 476: add patch-level uncertainty from DINOv2 register tokens (2026-04-13T23:50:13Z) ---
 
 # --- Auto-research iteration 477: implement cross-encoder consistency scoring (2026-04-13T23:50:13Z) ---
+
+# --- Auto-research iteration 486: implement feature distillation from teacher encoder (2026-04-13T23:50:14Z) ---
