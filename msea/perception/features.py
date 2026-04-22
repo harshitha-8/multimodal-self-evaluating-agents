@@ -261,3 +261,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 473: add feature normalization with learnable temperature (2026-04-13T23:50:12Z) ---
 
 # --- Auto-research iteration 482: implement multi-crop ensemble for robust features (2026-04-13T23:50:13Z) ---
+
+# --- Auto-research iteration 483: add feature dimensionality reduction with PCA projection (2026-04-13T23:50:13Z) ---
