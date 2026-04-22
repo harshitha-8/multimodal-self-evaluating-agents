@@ -318,3 +318,5 @@ def get_encoder(name: str, config: Optional[Dict] = None) -> VisionEncoder:
 # --- Auto-research iteration 442: iterative improvement to multimodal self-evaluation pipeline (commit 441) (2026-04-13T23:50:10Z) ---
 
 # --- Auto-research iteration 443: iterative improvement to multimodal self-evaluation pipeline (commit 442) (2026-04-13T23:50:10Z) ---
+
+# --- Auto-research iteration 452: implement adaptive reflection frequency based on ECE (2026-04-13T23:50:10Z) ---
