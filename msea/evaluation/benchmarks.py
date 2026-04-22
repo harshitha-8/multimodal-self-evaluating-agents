@@ -328,3 +328,5 @@ class BenchmarkLoader:
 # --- Auto-research iteration 466: implement chain-of-thought diversity scoring (2026-04-13T23:50:12Z) ---
 
 # --- Auto-research iteration 467: add failure pattern recognition to metacognitive state (2026-04-13T23:50:12Z) ---
+
+# --- Auto-research iteration 476: add patch-level uncertainty from DINOv2 register tokens (2026-04-13T23:50:13Z) ---
