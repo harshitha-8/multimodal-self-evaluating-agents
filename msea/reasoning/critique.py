@@ -316,3 +316,5 @@ class SelfCritique:
 # --- Auto-research iteration 464: implement gradient-free hyperparameter adaptation (2026-04-13T23:50:12Z) ---
 
 # --- Auto-research iteration 465: add online calibration update with exponential smoothing (2026-04-13T23:50:12Z) ---
+
+# --- Auto-research iteration 474: refactor encoder factory to support custom backbones (2026-04-13T23:50:13Z) ---
