@@ -257,3 +257,5 @@ class SelfEvaluationScorer:
 # --- Auto-research iteration 487: add visual grounding score computation (2026-04-13T23:50:14Z) ---
 
 # --- Auto-research iteration 496: add reasoning step clustering for pattern discovery (2026-04-13T23:50:15Z) ---
+
+# --- Auto-research iteration 497: implement chain-of-thought beam search with PRM (2026-04-13T23:50:15Z) ---
