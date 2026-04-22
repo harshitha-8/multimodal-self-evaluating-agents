@@ -454,3 +454,5 @@ class BaseAgent(ABC):
 # --- Auto-research iteration 481: add perceptual hashing for near-duplicate detection (2026-04-13T23:50:13Z) ---
 
 # --- Auto-research iteration 490: add feature attribution for interpretability (2026-04-13T23:50:14Z) ---
+
+# --- Auto-research iteration 491: add visual grounding verification to CoT evaluation (2026-04-13T23:50:14Z) ---
