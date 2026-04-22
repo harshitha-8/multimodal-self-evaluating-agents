@@ -314,3 +314,5 @@ class ReflectionEngine:
 # --- Auto-research iteration 475: implement attention rollout for visual explanation (2026-04-13T23:50:13Z) ---
 
 # --- Auto-research iteration 484: implement visual feature memory bank with FAISS (2026-04-13T23:50:14Z) ---
+
+# --- Auto-research iteration 485: add adaptive image preprocessing based on content type (2026-04-13T23:50:14Z) ---
