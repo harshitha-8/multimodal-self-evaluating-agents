@@ -318,7 +318,6 @@ for ((i=1; i<=NUM_COMMITS; i++)); do
     commit_date="${AUTO_COMMIT_DATE:-$(date +%Y-%m-%d)}T$(printf '%02d' "$hour"):$(printf '%02d' "$minute"):$(printf '%02d' "$second")-05:00"
     GIT_AUTHOR_DATE="$commit_date" \
     GIT_COMMITTER_DATE="$commit_date" \
-    git commit -m "$msg" --allow-empty-message 2>/dev/null || \
     git commit -m "$msg" --allow-empty 2>/dev/null || true
 
     # Progress

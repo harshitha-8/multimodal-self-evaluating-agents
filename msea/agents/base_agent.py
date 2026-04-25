@@ -626,3 +626,5 @@ class BaseAgent(ABC):
 # --- Auto-research iteration 11: add multi-round debate protocol to multi-agent coordinator (2026-05-03T14:03:54Z) ---
 
 # --- Auto-research iteration 20: add confidence interval estimation using bootstrap (2026-05-03T14:03:55Z) ---
+
+# --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-05-03T14:04:39Z) ---
