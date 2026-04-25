@@ -515,3 +515,5 @@ class PerceptualUncertainty:
 # --- Auto-research iteration 12: implement speculation execution for parallel tool calls (2026-05-03T14:03:54Z) ---
 
 # --- Auto-research iteration 13: add agent serialization for experiment reproducibility (2026-05-03T14:03:55Z) ---
+
+# --- Auto-research iteration 2: implement adaptive reflection frequency based on ECE (2026-05-03T14:04:39Z) ---
