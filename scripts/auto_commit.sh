@@ -16,7 +16,7 @@ cd "$REPO_PATH"
 
 # Ensure git is configured
 git config user.name "Harshitha M" 2>/dev/null || true
-git config user.email "harshitha@example.com" 2>/dev/null || true
+git config user.email "harshithamanjunath84@gmail.com" 2>/dev/null || true
 
 # Ensure remote is set
 git remote set-url origin "$REMOTE_URL" 2>/dev/null || git remote add origin "$REMOTE_URL" 2>/dev/null || true
@@ -315,8 +315,9 @@ for ((i=1; i<=NUM_COMMITS; i++)); do
 
     # Stage and commit
     git add -A
-    GIT_AUTHOR_DATE="$(date -v+${day_offset}d -u +"%Y-%m-%dT${hour}:%02d:${second}Z" 2>/dev/null || date -d "+${day_offset} days" -u +"%Y-%m-%dT${hour}:%02d:${second}Z" 2>/dev/null || date -u +"%Y-%m-%dT%H:%M:%SZ")" \
-    GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE" \
+    commit_date="${AUTO_COMMIT_DATE:-$(date +%Y-%m-%d)}T$(printf '%02d' "$hour"):$(printf '%02d' "$minute"):$(printf '%02d' "$second")-05:00"
+    GIT_AUTHOR_DATE="$commit_date" \
+    GIT_COMMITTER_DATE="$commit_date" \
     git commit -m "$msg" --allow-empty-message 2>/dev/null || \
     git commit -m "$msg" --allow-empty 2>/dev/null || true
 
