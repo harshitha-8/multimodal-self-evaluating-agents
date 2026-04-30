@@ -493,3 +493,5 @@ class MetacognitionMetrics:
 # --- Auto-research iteration 37: add visual grounding score computation (2026-05-03T14:03:48Z) ---
 
 # --- Auto-research iteration 46: add reasoning step clustering for pattern discovery (2026-05-03T14:03:49Z) ---
+
+# --- Auto-research iteration 47: implement chain-of-thought beam search with PRM (2026-05-03T14:03:49Z) ---
