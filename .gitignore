@@ -33,6 +33,7 @@ data/
 results/*.json
 results/*.png
 run.log
+logs/*.log
 
 # Model weights
 *.pt

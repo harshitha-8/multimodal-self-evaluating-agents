@@ -293,7 +293,7 @@ for ((i=1; i<=NUM_COMMITS; i++)); do
 
     # Calculate a date offset to spread commits across 10 days
     # ~50 commits per day
-    day_offset=$((i / 50))
+    day_offset=$(((i - 1) / 50))
     hour=$((RANDOM % 14 + 8))  # 8am to 10pm
     minute=$((RANDOM % 60))
     second=$((RANDOM % 60))
