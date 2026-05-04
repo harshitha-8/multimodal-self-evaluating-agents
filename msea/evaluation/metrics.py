@@ -523,3 +523,5 @@ class MetacognitionMetrics:
 # --- Auto-research iteration 16: implement chain-of-thought diversity scoring (2026-05-03T14:03:55Z) ---
 
 # --- Auto-research iteration 17: add failure pattern recognition to metacognitive state (2026-05-03T14:03:55Z) ---
+
+# --- Auto-research iteration 6: implement soft-gating for reflection token detection (2026-05-04T11:37:27Z) ---
