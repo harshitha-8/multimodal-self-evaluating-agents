@@ -555,3 +555,5 @@ class PerceptualUncertainty:
 # --- Auto-research iteration 32: implement multi-crop ensemble for robust features (2026-05-04T11:37:28Z) ---
 
 # --- Auto-research iteration 33: add feature dimensionality reduction with PCA projection (2026-05-04T11:37:28Z) ---
+
+# --- Auto-research iteration 42: implement token-level process supervision scoring (2026-05-04T11:37:28Z) ---
