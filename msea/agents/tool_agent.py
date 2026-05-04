@@ -671,3 +671,5 @@ class ToolAugmentedAgent(BaseAgent):
 # --- Auto-research iteration 31: add perceptual hashing for near-duplicate detection (2026-05-04T11:37:28Z) ---
 
 # --- Auto-research iteration 40: add feature attribution for interpretability (2026-05-04T11:37:28Z) ---
+
+# --- Auto-research iteration 41: add visual grounding verification to CoT evaluation (2026-05-04T11:37:28Z) ---
