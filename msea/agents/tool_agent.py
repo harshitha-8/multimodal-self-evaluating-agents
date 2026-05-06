@@ -695,3 +695,5 @@ class ToolAugmentedAgent(BaseAgent):
 # --- Auto-research iteration 41: add visual grounding verification to CoT evaluation (2026-05-05T13:17:05Z) ---
 
 # --- Auto-research iteration 50: implement tree-of-thought search with pruning (2026-05-05T13:17:06Z) ---
+
+# --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-05-06T11:21:13Z) ---
