@@ -655,3 +655,5 @@ class MetacognitionMetrics:
 # --- Auto-research iteration 26: add patch-level uncertainty from DINOv2 register tokens (2026-05-10T13:17:18Z) ---
 
 # --- Auto-research iteration 27: implement cross-encoder consistency scoring (2026-05-10T13:17:18Z) ---
+
+# --- Auto-research iteration 36: implement feature distillation from teacher encoder (2026-05-10T13:17:19Z) ---
