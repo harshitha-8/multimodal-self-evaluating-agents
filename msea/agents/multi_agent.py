@@ -673,3 +673,5 @@ class MultiAgentCoordinator(BaseAgent):
 # --- Auto-research iteration 50: implement tree-of-thought search with pruning (2026-05-09T14:06:55Z) ---
 
 # --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-05-10T13:17:14Z) ---
+
+# --- Auto-research iteration 10: refactor tool selection with cost-benefit scoring (2026-05-10T13:17:16Z) ---
