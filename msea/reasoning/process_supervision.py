@@ -687,3 +687,5 @@ class ProcessSupervisor:
 # --- Auto-research iteration 25: implement attention rollout for visual explanation (2026-05-11T14:07:32Z) ---
 
 # --- Auto-research iteration 34: implement visual feature memory bank with FAISS (2026-05-11T14:07:33Z) ---
+
+# --- Auto-research iteration 35: add adaptive image preprocessing based on content type (2026-05-11T14:07:33Z) ---
