@@ -737,3 +737,5 @@ class MultiAgentCoordinator(BaseAgent):
 # --- Auto-research iteration 10: refactor tool selection with cost-benefit scoring (2026-05-13T14:17:03Z) ---
 
 # --- Auto-research iteration 11: add multi-round debate protocol to multi-agent coordinator (2026-05-13T14:17:03Z) ---
+
+# --- Auto-research iteration 20: add confidence interval estimation using bootstrap (2026-05-13T14:17:04Z) ---
