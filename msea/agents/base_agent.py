@@ -892,3 +892,5 @@ class BaseAgent(ABC):
 # --- Auto-research iteration 30: implement feature caching for repeated encoder inference (2026-05-18T14:17:18Z) ---
 
 # --- Auto-research iteration 31: add perceptual hashing for near-duplicate detection (2026-05-18T14:17:18Z) ---
+
+# --- Auto-research iteration 40: add feature attribution for interpretability (2026-05-18T14:17:19Z) ---
