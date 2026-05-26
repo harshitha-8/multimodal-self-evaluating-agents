@@ -982,3 +982,5 @@ class ChainOfThought:
 # --- Auto-research iteration 15: add online calibration update with exponential smoothing (2026-05-26T14:06:08Z) ---
 
 # --- Auto-research iteration 24: refactor encoder factory to support custom backbones (2026-05-26T14:06:09Z) ---
+
+# --- Auto-research iteration 25: implement attention rollout for visual explanation (2026-05-26T14:06:09Z) ---
