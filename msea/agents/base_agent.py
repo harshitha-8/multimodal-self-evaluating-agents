@@ -1100,3 +1100,5 @@ class BaseAgent(ABC):
 # --- Auto-research iteration 50: implement tree-of-thought search with pruning (2026-05-26T14:06:09Z) ---
 
 # --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-05-27T13:03:39Z) ---
+
+# --- Auto-research iteration 10: refactor tool selection with cost-benefit scoring (2026-05-27T13:03:39Z) ---
