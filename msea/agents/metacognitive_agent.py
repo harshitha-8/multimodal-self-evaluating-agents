@@ -1413,3 +1413,5 @@ class MetacognitiveAgent(BaseAgent):
 # --- Auto-research iteration 41: add visual grounding verification to CoT evaluation (2026-05-31T05:01:50Z) ---
 
 # --- Auto-research iteration 50: implement tree-of-thought search with pruning (2026-05-31T05:01:51Z) ---
+
+# --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-06-01T05:02:14Z) ---
