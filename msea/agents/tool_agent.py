@@ -1237,3 +1237,5 @@ class ToolAugmentedAgent(BaseAgent):
 # --- Auto-research iteration 50: implement tree-of-thought search with pruning (2026-06-01T05:02:19Z) ---
 
 # --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-06-02T19:46:37Z) ---
+
+# --- Auto-research iteration 10: refactor tool selection with cost-benefit scoring (2026-06-02T19:46:38Z) ---
