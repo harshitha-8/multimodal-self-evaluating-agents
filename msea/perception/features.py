@@ -1051,3 +1051,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 22: implement multi-scale feature extraction for DINOv2 (2026-06-02T19:46:38Z) ---
 
 # --- Auto-research iteration 23: add feature normalization with learnable temperature (2026-06-02T19:46:38Z) ---
+
+# --- Auto-research iteration 32: implement multi-crop ensemble for robust features (2026-06-02T19:46:39Z) ---
