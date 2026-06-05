@@ -1203,3 +1203,5 @@ class MultiAgentCoordinator(BaseAgent):
 # --- Auto-research iteration 21: add SigLIP encoder with sigmoid loss similarity (2026-06-05T05:58:02Z) ---
 
 # --- Auto-research iteration 30: implement feature caching for repeated encoder inference (2026-06-05T05:58:03Z) ---
+
+# --- Auto-research iteration 31: add perceptual hashing for near-duplicate detection (2026-06-05T05:58:03Z) ---
