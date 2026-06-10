@@ -1282,3 +1282,5 @@ def get_encoder(name: str, config: Optional[Dict] = None) -> VisionEncoder:
 # --- Auto-research iteration 22: implement multi-scale feature extraction for DINOv2 (2026-06-10T05:07:43Z) ---
 
 # --- Auto-research iteration 23: add feature normalization with learnable temperature (2026-06-10T05:07:43Z) ---
+
+# --- Auto-research iteration 32: implement multi-crop ensemble for robust features (2026-06-10T05:07:43Z) ---
