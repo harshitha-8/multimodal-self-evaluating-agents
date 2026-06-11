@@ -1270,3 +1270,5 @@ class SelfCritique:
 # --- Auto-research iteration 15: add online calibration update with exponential smoothing (2026-06-10T05:07:42Z) ---
 
 # --- Auto-research iteration 24: refactor encoder factory to support custom backbones (2026-06-10T05:07:43Z) ---
+
+# --- Auto-research iteration 25: implement attention rollout for visual explanation (2026-06-10T05:07:43Z) ---
