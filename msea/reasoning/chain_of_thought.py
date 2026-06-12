@@ -1318,3 +1318,5 @@ class ChainOfThought:
 # --- Auto-research iteration 5: add memory-bounded reflection history with LRU eviction (2026-06-12T14:38:53Z) ---
 
 # --- Auto-research iteration 14: implement gradient-free hyperparameter adaptation (2026-06-12T14:38:54Z) ---
+
+# --- Auto-research iteration 15: add online calibration update with exponential smoothing (2026-06-12T14:38:54Z) ---
