@@ -1406,3 +1406,5 @@ class BenchmarkLoader:
 # --- Auto-research iteration 37: add visual grounding score computation (2026-06-17T16:02:19Z) ---
 
 # --- Auto-research iteration 46: add reasoning step clustering for pattern discovery (2026-06-17T16:02:20Z) ---
+
+# --- Auto-research iteration 47: implement chain-of-thought beam search with PRM (2026-06-17T16:02:20Z) ---
