@@ -1459,3 +1459,5 @@ class PerceptualUncertainty:
 # --- Auto-research iteration 42: implement token-level process supervision scoring (2026-06-18T14:48:51Z) ---
 
 # --- Auto-research iteration 43: add multi-hop reasoning chain construction (2026-06-18T14:48:51Z) ---
+
+# --- Auto-research iteration 2: implement adaptive reflection frequency based on ECE (2026-06-19T10:19:23Z) ---
