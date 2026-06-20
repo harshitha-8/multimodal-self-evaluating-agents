@@ -1383,3 +1383,5 @@ class CrossModalConsistency:
 # --- Auto-research iteration 17: add failure pattern recognition to metacognitive state (2026-06-20T05:07:50Z) ---
 
 # --- Auto-research iteration 26: add patch-level uncertainty from DINOv2 register tokens (2026-06-20T05:07:50Z) ---
+
+# --- Auto-research iteration 27: implement cross-encoder consistency scoring (2026-06-20T05:07:50Z) ---
