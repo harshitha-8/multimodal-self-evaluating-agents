@@ -1502,3 +1502,5 @@ class SelfCritique:
 # --- Auto-research iteration 45: implement Reflexion-style verbal reinforcement loop (2026-06-21T12:37:21Z) ---
 
 # --- Auto-research iteration 4: refactor agent state machine with explicit transitions (2026-06-22T14:10:06Z) ---
+
+# --- Auto-research iteration 5: add memory-bounded reflection history with LRU eviction (2026-06-22T14:10:07Z) ---
