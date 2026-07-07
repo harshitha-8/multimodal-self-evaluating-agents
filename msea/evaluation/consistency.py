@@ -1713,3 +1713,5 @@ class CrossModalConsistency:
 # --- Auto-research iteration 46: add reasoning step clustering for pattern discovery (2026-07-06T05:28:57Z) ---
 
 # --- Auto-research iteration 47: implement chain-of-thought beam search with PRM (2026-07-06T05:28:57Z) ---
+
+# --- Auto-research iteration 6: implement soft-gating for reflection token detection (2026-07-07T12:57:44Z) ---
