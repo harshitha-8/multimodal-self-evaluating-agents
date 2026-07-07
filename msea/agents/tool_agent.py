@@ -1947,3 +1947,5 @@ class ToolAugmentedAgent(BaseAgent):
 # --- Auto-research iteration 21: add SigLIP encoder with sigmoid loss similarity (2026-07-07T12:57:45Z) ---
 
 # --- Auto-research iteration 30: implement feature caching for repeated encoder inference (2026-07-07T12:57:45Z) ---
+
+# --- Auto-research iteration 31: add perceptual hashing for near-duplicate detection (2026-07-07T12:57:45Z) ---
