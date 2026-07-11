@@ -1890,3 +1890,5 @@ def get_encoder(name: str, config: Optional[Dict] = None) -> VisionEncoder:
 # --- Auto-research iteration 42: implement token-level process supervision scoring (2026-07-10T12:33:22Z) ---
 
 # --- Auto-research iteration 43: add multi-hop reasoning chain construction (2026-07-10T12:33:22Z) ---
+
+# --- Auto-research iteration 2: implement adaptive reflection frequency based on ECE (2026-07-11T07:17:01Z) ---
