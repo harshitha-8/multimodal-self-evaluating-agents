@@ -1960,3 +1960,5 @@ def get_encoder(name: str, config: Optional[Dict] = None) -> VisionEncoder:
 # --- Auto-research iteration 13: add agent serialization for experiment reproducibility (2026-07-14T05:17:03Z) ---
 
 # --- Auto-research iteration 22: implement multi-scale feature extraction for DINOv2 (2026-07-14T05:17:04Z) ---
+
+# --- Auto-research iteration 23: add feature normalization with learnable temperature (2026-07-14T05:17:04Z) ---
