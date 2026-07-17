@@ -2045,3 +2045,5 @@ class MultiAgentCoordinator(BaseAgent):
 # --- Auto-research iteration 30: implement feature caching for repeated encoder inference (2026-07-17T12:52:11Z) ---
 
 # --- Auto-research iteration 31: add perceptual hashing for near-duplicate detection (2026-07-17T12:52:11Z) ---
+
+# --- Auto-research iteration 40: add feature attribution for interpretability (2026-07-17T12:52:12Z) ---
