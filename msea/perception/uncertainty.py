@@ -2111,3 +2111,5 @@ class PerceptualUncertainty:
 # --- Auto-research iteration 22: implement multi-scale feature extraction for DINOv2 (2026-07-23T15:35:58Z) ---
 
 # --- Auto-research iteration 23: add feature normalization with learnable temperature (2026-07-23T15:35:58Z) ---
+
+# --- Auto-research iteration 32: implement multi-crop ensemble for robust features (2026-07-23T15:35:58Z) ---
