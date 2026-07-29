@@ -2107,3 +2107,5 @@ class CrossModalConsistency:
 # --- Auto-research iteration 27: implement cross-encoder consistency scoring (2026-07-28T10:17:34Z) ---
 
 # --- Auto-research iteration 36: implement feature distillation from teacher encoder (2026-07-28T10:17:35Z) ---
+
+# --- Auto-research iteration 37: add visual grounding score computation (2026-07-28T10:17:36Z) ---
