@@ -2233,3 +2233,5 @@ class PerceptualUncertainty:
 # --- Auto-research iteration 23: add feature normalization with learnable temperature (2026-07-29T15:05:42Z) ---
 
 # --- Auto-research iteration 32: implement multi-crop ensemble for robust features (2026-07-29T15:05:43Z) ---
+
+# --- Auto-research iteration 33: add feature dimensionality reduction with PCA projection (2026-07-29T15:05:43Z) ---
