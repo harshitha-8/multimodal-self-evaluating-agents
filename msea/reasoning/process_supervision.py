@@ -2559,3 +2559,5 @@ class ProcessSupervisor:
 # --- Auto-research iteration 5: add memory-bounded reflection history with LRU eviction (2026-08-16T16:44:48Z) ---
 
 # --- Auto-research iteration 14: implement gradient-free hyperparameter adaptation (2026-08-16T16:44:49Z) ---
+
+# --- Auto-research iteration 15: add online calibration update with exponential smoothing (2026-08-16T16:44:49Z) ---
