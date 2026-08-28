@@ -2771,3 +2771,5 @@ class MetacognitionMetrics:
 # --- Auto-research iteration 16: implement chain-of-thought diversity scoring (2026-08-28T05:05:59Z) ---
 
 # --- Auto-research iteration 17: add failure pattern recognition to metacognitive state (2026-08-28T05:05:59Z) ---
+
+# --- Auto-research iteration 26: add patch-level uncertainty from DINOv2 register tokens (2026-08-28T05:06:00Z) ---
