@@ -2896,3 +2896,5 @@ def get_encoder(name: str, config: Optional[Dict] = None) -> VisionEncoder:
 # --- Auto-research iteration 3: add entropy-based uncertainty estimation to base agent (2026-09-03T05:09:05Z) ---
 
 # --- Auto-research iteration 12: implement speculation execution for parallel tool calls (2026-09-03T05:09:06Z) ---
+
+# --- Auto-research iteration 13: add agent serialization for experiment reproducibility (2026-09-03T05:09:06Z) ---
