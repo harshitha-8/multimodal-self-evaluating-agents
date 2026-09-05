@@ -2934,3 +2934,5 @@ class ChainOfThought:
 # --- Auto-research iteration 45: implement Reflexion-style verbal reinforcement loop (2026-09-04T14:03:49Z) ---
 
 # --- Auto-research iteration 4: refactor agent state machine with explicit transitions (2026-09-05T13:20:17Z) ---
+
+# --- Auto-research iteration 5: add memory-bounded reflection history with LRU eviction (2026-09-05T13:20:17Z) ---
