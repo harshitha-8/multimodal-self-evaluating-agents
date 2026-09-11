@@ -3028,3 +3028,5 @@ class BenchmarkLoader:
 # --- Auto-research iteration 46: add reasoning step clustering for pattern discovery (2026-09-10T12:18:53Z) ---
 
 # --- Auto-research iteration 47: implement chain-of-thought beam search with PRM (2026-09-10T12:18:54Z) ---
+
+# --- Auto-research iteration 6: implement soft-gating for reflection token detection (2026-09-11T14:17:02Z) ---
