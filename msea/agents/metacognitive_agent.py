@@ -3397,3 +3397,5 @@ class MetacognitiveAgent(BaseAgent):
 # --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-09-12T19:02:30Z) ---
 
 # --- Auto-research iteration 10: refactor tool selection with cost-benefit scoring (2026-09-12T19:02:30Z) ---
+
+# --- Auto-research iteration 11: add multi-round debate protocol to multi-agent coordinator (2026-09-12T19:02:31Z) ---
