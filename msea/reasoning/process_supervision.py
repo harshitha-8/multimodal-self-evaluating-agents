@@ -3083,3 +3083,5 @@ class ProcessSupervisor:
 # --- Auto-research iteration 15: add online calibration update with exponential smoothing (2026-09-12T19:02:31Z) ---
 
 # --- Auto-research iteration 24: refactor encoder factory to support custom backbones (2026-09-12T19:02:31Z) ---
+
+# --- Auto-research iteration 25: implement attention rollout for visual explanation (2026-09-12T19:02:31Z) ---
