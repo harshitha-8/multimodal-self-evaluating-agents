@@ -3181,3 +3181,5 @@ class PerceptualUncertainty:
 # --- Auto-research iteration 43: add multi-hop reasoning chain construction (2026-09-16T12:17:06Z) ---
 
 # --- Auto-research iteration 2: implement adaptive reflection frequency based on ECE (2026-09-17T14:13:13Z) ---
+
+# --- Auto-research iteration 3: add entropy-based uncertainty estimation to base agent (2026-09-17T14:13:13Z) ---
