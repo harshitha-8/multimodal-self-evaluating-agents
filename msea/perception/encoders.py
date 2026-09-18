@@ -3192,3 +3192,5 @@ def get_encoder(name: str, config: Optional[Dict] = None) -> VisionEncoder:
 # --- Auto-research iteration 43: add multi-hop reasoning chain construction (2026-09-17T14:13:15Z) ---
 
 # --- Auto-research iteration 2: implement adaptive reflection frequency based on ECE (2026-09-18T05:17:02Z) ---
+
+# --- Auto-research iteration 3: add entropy-based uncertainty estimation to base agent (2026-09-18T05:17:02Z) ---
