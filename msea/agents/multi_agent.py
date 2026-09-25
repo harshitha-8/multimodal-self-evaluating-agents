@@ -3351,3 +3351,5 @@ class MultiAgentCoordinator(BaseAgent):
 # --- Auto-research iteration 41: add visual grounding verification to CoT evaluation (2026-09-24T19:42:52Z) ---
 
 # --- Auto-research iteration 50: implement tree-of-thought search with pruning (2026-09-24T19:42:52Z) ---
+
+# --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-09-25T12:42:23Z) ---
