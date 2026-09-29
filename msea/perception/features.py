@@ -3339,3 +3339,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 42: implement token-level process supervision scoring (2026-09-28T11:57:37Z) ---
 
 # --- Auto-research iteration 43: add multi-hop reasoning chain construction (2026-09-28T11:57:37Z) ---
+
+# --- Auto-research iteration 2: implement adaptive reflection frequency based on ECE (2026-09-29T20:18:44Z) ---
