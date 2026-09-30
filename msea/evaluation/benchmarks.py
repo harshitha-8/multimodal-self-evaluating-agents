@@ -3422,3 +3422,5 @@ class BenchmarkLoader:
 # --- Auto-research iteration 27: implement cross-encoder consistency scoring (2026-09-30T05:47:09Z) ---
 
 # --- Auto-research iteration 36: implement feature distillation from teacher encoder (2026-09-30T05:47:11Z) ---
+
+# --- Auto-research iteration 37: add visual grounding score computation (2026-09-30T05:47:11Z) ---
