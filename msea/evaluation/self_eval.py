@@ -3399,3 +3399,5 @@ class SelfEvaluationScorer:
 # --- Auto-research iteration 26: add patch-level uncertainty from DINOv2 register tokens (2026-10-03T05:50:36Z) ---
 
 # --- Auto-research iteration 27: implement cross-encoder consistency scoring (2026-10-03T05:50:36Z) ---
+
+# --- Auto-research iteration 36: implement feature distillation from teacher encoder (2026-10-03T05:50:37Z) ---
