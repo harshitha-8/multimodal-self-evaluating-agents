@@ -3560,3 +3560,5 @@ class ChainOfThought:
 # --- Auto-research iteration 14: implement gradient-free hyperparameter adaptation (2026-10-06T11:47:03Z) ---
 
 # --- Auto-research iteration 15: add online calibration update with exponential smoothing (2026-10-06T11:47:03Z) ---
+
+# --- Auto-research iteration 24: refactor encoder factory to support custom backbones (2026-10-06T11:47:04Z) ---
