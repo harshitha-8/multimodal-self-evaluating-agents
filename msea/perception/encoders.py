@@ -3644,3 +3644,5 @@ def get_encoder(name: str, config: Optional[Dict] = None) -> VisionEncoder:
 # --- Auto-research iteration 23: add feature normalization with learnable temperature (2026-10-11T18:47:07Z) ---
 
 # --- Auto-research iteration 32: implement multi-crop ensemble for robust features (2026-10-11T18:47:08Z) ---
+
+# --- Auto-research iteration 33: add feature dimensionality reduction with PCA projection (2026-10-11T18:47:08Z) ---
