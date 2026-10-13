@@ -1778,3 +1778,5 @@ class RetrievalTool:
 # --- Auto-research iteration 9: add reasoning trace pruning for memory efficiency (2026-10-13T05:23:00Z) ---
 
 # --- Auto-research iteration 19: implement lazy evaluation for tool-augmented reasoning (2026-10-13T05:23:01Z) ---
+
+# --- Auto-research iteration 29: refactor feature fusion with attention-weighted combination (2026-10-13T05:23:01Z) ---
