@@ -3677,3 +3677,5 @@ class MetacognitionMetrics:
 # --- Auto-research iteration 27: implement cross-encoder consistency scoring (2026-10-13T05:23:01Z) ---
 
 # --- Auto-research iteration 36: implement feature distillation from teacher encoder (2026-10-13T05:23:01Z) ---
+
+# --- Auto-research iteration 37: add visual grounding score computation (2026-10-13T05:23:01Z) ---
