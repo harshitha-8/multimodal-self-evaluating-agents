@@ -3923,3 +3923,5 @@ class MetacognitionMetrics:
 # --- Auto-research iteration 46: add reasoning step clustering for pattern discovery (2026-10-25T05:52:53Z) ---
 
 # --- Auto-research iteration 47: implement chain-of-thought beam search with PRM (2026-10-25T05:52:53Z) ---
+
+# --- Auto-research iteration 6: implement soft-gating for reflection token detection (2026-10-26T15:15:20Z) ---
