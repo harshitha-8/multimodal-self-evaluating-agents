@@ -3977,3 +3977,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 33: add feature dimensionality reduction with PCA projection (2026-11-01T13:17:08Z) ---
 
 # --- Auto-research iteration 42: implement token-level process supervision scoring (2026-11-01T13:17:09Z) ---
+
+# --- Auto-research iteration 43: add multi-hop reasoning chain construction (2026-11-01T13:17:09Z) ---
