@@ -4095,3 +4095,5 @@ class ProcessSupervisor:
 # --- Auto-research iteration 45: implement Reflexion-style verbal reinforcement loop (2026-11-03T12:04:48Z) ---
 
 # --- Auto-research iteration 4: refactor agent state machine with explicit transitions (2026-11-04T07:17:37Z) ---
+
+# --- Auto-research iteration 5: add memory-bounded reflection history with LRU eviction (2026-11-04T07:17:37Z) ---
