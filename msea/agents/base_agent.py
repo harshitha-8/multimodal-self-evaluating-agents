@@ -4218,3 +4218,5 @@ class BaseAgent(ABC):
 # --- Auto-research iteration 41: add visual grounding verification to CoT evaluation (2026-11-04T07:17:41Z) ---
 
 # --- Auto-research iteration 50: implement tree-of-thought search with pruning (2026-11-04T07:17:42Z) ---
+
+# --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-11-05T11:17:02Z) ---
