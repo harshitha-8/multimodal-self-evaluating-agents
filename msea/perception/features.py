@@ -4121,3 +4121,5 @@ class FeatureExtractor:
 # --- Auto-research iteration 43: add multi-hop reasoning chain construction (2026-11-08T15:49:44Z) ---
 
 # --- Auto-research iteration 2: implement adaptive reflection frequency based on ECE (2026-11-09T09:21:29Z) ---
+
+# --- Auto-research iteration 3: add entropy-based uncertainty estimation to base agent (2026-11-09T09:21:29Z) ---
