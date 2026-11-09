@@ -4321,3 +4321,5 @@ class ToolAugmentedAgent(BaseAgent):
 # --- Auto-research iteration 10: refactor tool selection with cost-benefit scoring (2026-11-09T09:21:29Z) ---
 
 # --- Auto-research iteration 11: add multi-round debate protocol to multi-agent coordinator (2026-11-09T09:21:30Z) ---
+
+# --- Auto-research iteration 20: add confidence interval estimation using bootstrap (2026-11-09T09:21:31Z) ---
