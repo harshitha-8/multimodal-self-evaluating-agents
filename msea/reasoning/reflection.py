@@ -4262,3 +4262,5 @@ class ReflectionEngine:
 # --- Auto-research iteration 15: add online calibration update with exponential smoothing (2026-11-13T13:17:03Z) ---
 
 # --- Auto-research iteration 24: refactor encoder factory to support custom backbones (2026-11-13T13:17:04Z) ---
+
+# --- Auto-research iteration 25: implement attention rollout for visual explanation (2026-11-13T13:17:05Z) ---
