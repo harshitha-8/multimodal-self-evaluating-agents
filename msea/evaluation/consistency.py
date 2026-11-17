@@ -4251,3 +4251,5 @@ class CrossModalConsistency:
 # --- Auto-research iteration 37: add visual grounding score computation (2026-11-17T14:21:39Z) ---
 
 # --- Auto-research iteration 46: add reasoning step clustering for pattern discovery (2026-11-17T14:21:41Z) ---
+
+# --- Auto-research iteration 47: implement chain-of-thought beam search with PRM (2026-11-17T14:21:41Z) ---
