@@ -4715,3 +4715,5 @@ class MetacognitiveAgent(BaseAgent):
 # --- Auto-research iteration 50: implement tree-of-thought search with pruning (2026-11-19T14:17:08Z) ---
 
 # --- Auto-research iteration 1: add confidence decay schedule to metacognitive loop (2026-11-20T15:08:50Z) ---
+
+# --- Auto-research iteration 10: refactor tool selection with cost-benefit scoring (2026-11-20T15:08:51Z) ---
